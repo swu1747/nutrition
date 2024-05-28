@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-
-
+import { Link, useNavigate } from "react-router-dom";
 const SignIn = () => {
     const [email, setEmail] = useState('')
     const [pwd, setPwd] = useState('')
@@ -12,10 +11,11 @@ const SignIn = () => {
     const pwdHandler = (e) => {
         setPwd(e.target.value)
     }
+    const navi = useNavigate()
     const loginHandler = (e) => {
         e.preventDefault()
-        signInWithEmailAndPassword(auth, email, pwd).then((a) => {
-            console.log('>>>', a)
+        signInWithEmailAndPassword(auth, email, pwd).then((userCredential) => {
+            navi('/')
         }).catch((err) => {
             console.log('err', err)
         })
@@ -25,10 +25,12 @@ const SignIn = () => {
     return <div>
         <form onSubmit={loginHandler}>
             <label>email:</label><br />
-            <input type="text" value={email} onChange={emailhandler} />
-            <input type="text" value={pwd} onChange={pwdHandler} />
+            <input type="text" value={email} onChange={emailhandler} /><br />
+            <label>password:</label><br />
+            <input type="text" value={pwd} onChange={pwdHandler} /><br />
             <input type='submit' value='Log In' />
         </form>
+        <Link to='/signup' >Sign Up</Link>
     </div>
 }
 export default SignIn

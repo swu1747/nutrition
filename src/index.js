@@ -1,5 +1,11 @@
-import reactDom from 'react-dom'
+import ReactDOM from 'react-dom'
 import React from "react";
 import { App } from "./app.jsx";
+import { Provider } from 'react-redux';
+import store from './store.js';
 
-reactDom.render(<App/>,document.getElementById('app'))
+ReactDOM.render(<React.StrictMode>
+    <Provider store={store}>
+        <App />
+    </Provider>
+</React.StrictMode>, document.getElementById('app'))
