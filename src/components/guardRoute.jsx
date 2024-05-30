@@ -6,6 +6,7 @@ import { changeUserState, checkUserStat, fetchphoto } from "../feature/UserInfoS
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { ref, getStorage } from "firebase/storage";
+import axios from "axios";
 const storage = getStorage()
 const PrivateRoute = ({ children }) => {
     const dispatch = useDispatch()
@@ -17,7 +18,8 @@ const PrivateRoute = ({ children }) => {
                 dispatch(fetchphoto(PhotoRef))
                 dispatch(changeUserState('login'))
                 user.getIdToken().then((token) => {
-                    console.log('i am token', token)
+                    console.log(token)
+                    axios.defaults.headers.common['token'] = token
                 })
             } else {
                 dispatch(changeUserState('logout'))
