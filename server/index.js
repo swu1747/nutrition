@@ -1,11 +1,15 @@
 const express = require('express')
 const path = require('path')
-const app = express()
+const cookieParser = require('cookie-parser')
 const { admin } = require('./firebase/firebaseAdmin')
+
+
+const app = express()
+app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '../dist')))
 app.use((req, res, next) => {
-    const token = req.headers.token
-    console.log('>>>',token)
+    console.log('cookies', req.cookies)
+    const token = req.cookies.token
     if (!token) {
         console.log('notoken')
         res.redirect('/')

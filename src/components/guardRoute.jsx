@@ -19,7 +19,8 @@ const PrivateRoute = ({ children }) => {
                 dispatch(changeUserState('login'))
                 user.getIdToken().then((token) => {
                     console.log(token)
-                    axios.defaults.headers.common['token'] = token
+                    // axios.defaults.headers.common['token'] = token
+                    document.cookie = `token=${token}`
                 })
             } else {
                 dispatch(changeUserState('logout'))
