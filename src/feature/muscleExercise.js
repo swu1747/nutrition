@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
     part: '',
-    difficulty: 'all',
-    type: 'all',
+    difficulty: '',
+    type: '',
     page: 0,
     exerciseList: []
 }
@@ -30,12 +30,13 @@ const muscleExercise = createSlice({
 
     },
     extraReducers(builder) {
-
+        builder.addCase(updateList.fulfilled, () => {
+            
+        })
     }
 })
 
 export const updateList = createAsyncThunk('/updateexerciselist', async ({ part, difficulty, type, page }) => {
-    difficulty = difficulty === 'all' ? '' : difficulty
-    type = type === 'all' ? '' : type
+
 })
 export default muscleExercise.reducer

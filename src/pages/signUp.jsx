@@ -6,6 +6,7 @@ import { Navigate } from "react-router-dom";
 import { signup } from "../feature/signUpSlice";
 import { auth } from "../firebase";
 import styled from "@emotion/styled";
+import useFormInput from "../hooks/useFormInput";
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
     clipPath: 'inset(50%)',
@@ -21,25 +22,16 @@ const VisuallyHiddenInput = styled('input')({
 const SignUp = () => {
     const dispath = useDispatch()
     const signUpStatus = useSelector(checkSignUpStatus)
-    const [email, setEmail] = useState('')
-    const [password, setpwd] = useState('')
-    const [username, setUserNmae] = useState('')
+    const email = useFormInput('')
+    const pwd = useFormInput('')
+    const username = useFormInput('')
     const [avartarurl, setavarturl] = useState(null)
     const [preview, setpreview] = useState(null)
 
     let content
-    const emailhandler = (e) => {
-        setEmail(e.target.value)
-    }
-    const passwordhandler = (e) => {
-        setpwd(e.target.value)
-    }
-    const usernamehandler = (e) => {
-        setUserNmae(e.target.value)
-    }
     const signUpHandler = (e) => {
         e.preventDefault()
-        dispath(signup({ auth, email, password, username, avartarurl }))
+        dispath(signup({ auth, email: email.value, password: pwd.value, username: username.value, avartarurl }))
     }
     const avatarhandler = (e) => {
         const avatar = e.target.files[0]
@@ -52,11 +44,11 @@ const SignUp = () => {
         content = <div>
             <form onSubmit={signUpHandler}>
                 <label>email:</label><br />
-                <input type='text' value={email} onChange={emailhandler} /><br />
+                <input type='text' value={email.value} onChange={email.onChange} /><br />
                 <label>password:</label><br />
-                <input type='text' value={password} onChange={passwordhandler} /><br />
+                <input type='text' value={pwd.value} onChange={pwd.onChange} /><br />
                 <label>username:</label><br />
-                <input type='text' value={username} onChange={usernamehandler} /><br />
+                <input type='text' value={username.value} onChange={username.onChange} /><br />
                 <input type='submit' />
             </form>
             <Avatar src={preview}></Avatar>
