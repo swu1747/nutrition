@@ -8,11 +8,15 @@ import SignIn from "./pages/signin.jsx";
 import PrivateRoute from "./components/guardRoute.jsx";
 import Main from "./pages/mainPage.jsx";
 import SignUp from "./pages/signUp.jsx";
+import Fitness from "./pages/fitnessPage.jsx";
 export const App = () => {
     return (<>
         <Router>
             <Routes>
-                <Route path="/" element={<PrivateRoute ><Main /></PrivateRoute >} />
+                <Route path="/" element={<PrivateRoute />} >
+                    <Route path='/' element={<Main />} />
+                    <Route path="/fitness" element={<Fitness />} />
+                </Route>
                 <Route path="signin" element={<SignIn />} />
                 <Route path="signup" element={<SignUp />} />
             </Routes>
