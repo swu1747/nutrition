@@ -3,9 +3,7 @@ import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 const Logout = () => {
     const logouthandler = (e) => {
-        signOut(auth).then((a) => {
-            console.log(a)
-        })
+        signOut(auth)
     }
     return (<button onClick={logouthandler}>
         log out

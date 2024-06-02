@@ -9,9 +9,7 @@ import { checkUserphoto } from "../feature/UserInfoSlice.js";
 const Main = () => {
     const photo = useSelector(checkUserphoto)
     useEffect(() => {
-        axios.get('eat').then((res) => {
-            console.log(res)
-        })
+
     })
     return (<div>
         <Avatar src={photo}></Avatar>
