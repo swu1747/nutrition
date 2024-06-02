@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    parts: ['abdominals',
+    parts: ['abdominals','shoulders',
         'adductors',
         'biceps',
         'calves',

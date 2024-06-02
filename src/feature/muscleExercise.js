@@ -31,12 +31,12 @@ const muscleExercise = createSlice({
     },
     extraReducers(builder) {
         builder.addCase(updateList.fulfilled, () => {
-            
+
         })
     }
 })
 
-export const updateList = createAsyncThunk('/updateexerciselist', async ({ part, difficulty, type, page }) => {
+export const updateList = createAsyncThunk('/updateExerciseList', async ({ part, difficulty, type, page }) => {
 
 })
 export default muscleExercise.reducer
