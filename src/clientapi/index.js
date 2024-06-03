@@ -4,10 +4,11 @@ const apiRequest = axios.create({
 })
 export const getExercise = async ({ type, muscle, difficulty, offset }) => {
     try {
-        return axios.get('/exercise', {
+        return apiRequest.get('/exercise', {
             params: { type, muscle, difficulty, offset }
         })
     } catch (error) {
         throw error
     }
 }
+

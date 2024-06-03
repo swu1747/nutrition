@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 })
 app.get('/exercise', async (req, res, next) => {
     try {
-        const response = await getExercise(req.params)
+        const response = await getExercise(req.query)
         res.send(response.data)
     } catch (error) {
         throw error
