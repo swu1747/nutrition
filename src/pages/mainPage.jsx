@@ -1,5 +1,4 @@
 import { Avatar } from "@mui/material";
-import axios from "axios";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";

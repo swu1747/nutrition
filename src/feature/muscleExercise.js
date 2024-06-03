@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getExercise } from "../clientapi";
 const initialState = {
+    status: 'idle',
     muscle: '',
     difficulty: '',
     type: '',
@@ -25,30 +26,47 @@ const muscleExercise = createSlice({
             state.type = action.payload
         },
         setPage: (state) => {
-            state.offset++
+            console.log('before', state.offset)
+            state.offset += 1
+            console.log('after', state.offset)
+
         }
 
     },
     extraReducers(builder) {
         builder.addCase(updateExerciseList.fulfilled, (state, action) => {
             if (state.offset === 0) {
+                state.status = 'idle'
                 state.exerciseList = action.payload
             } else {
+                state.status = 'idle'
                 state.exerciseList = [...state.exerciseList, ...action.payload]
             }
+        }).addCase(updateExerciseList.pending, (state) => {
+            state.status = 'pending'
         })
     }
 })
 
-export const updateExerciseList = createAsyncThunk('/updateExerciseList', async ({ muscle, difficulty, type, offset }) => {
+export const updateExerciseList = createAsyncThunk('/updateExerciseList', async (_, { getState }) => {
     try {
-        const res = await getExercise({ muscle, difficulty, type, offset })
+        const params = {
+            muscle: getState().muscleExercise.muscle,
+            offset: getState().muscleExercise.offset,
+            type: getState().muscleExercise.type,
+            difficulty: getState().muscleExercise.difficulty
+        }
+        const res = await getExercise(params)
         return res.data
     } catch (error) {
         throw error
     }
 })
+export const fetchExerciseListStauts = (state) => {
+    return state.muscleExercise.status
+}
 export const fetchExerciseList = (state) => {
     return state.muscleExercise.exerciseList
 }
+export const { setmuscle, setPage, setType, setDifficulty } = muscleExercise.actions
 export default muscleExercise.reducer
