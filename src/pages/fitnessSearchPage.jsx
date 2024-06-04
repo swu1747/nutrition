@@ -1,7 +1,7 @@
 import { Card, CardMedia, ListItem, List, CardContent, Typography, AppBar, Select, InputLabel, MenuItem, FormControl, Button } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { fetchDifficulty, fetchExerciseListStauts, fetchtype, setDifficulty, setmuscle, setType, updateExerciseList } from "../feature/muscleExercise";
 import { fetchExerciseList } from "../feature/muscleExercise";
 import { setPage } from "../feature/muscleExercise"
@@ -33,7 +33,7 @@ const FitnessSearch = () => {
         dispatch(updateExerciseList())
         window.addEventListener('scroll', scrollhandler)
         return () => {
-            window.addEventListener('scroll', scrollhandler)
+            window.removeEventListener('scroll', scrollhandler)
         }
     }, [])
     return (<>
@@ -65,13 +65,15 @@ const FitnessSearch = () => {
         <List>
             {excerList.map((excer) => {
                 return <ListItem key={uuidv4()}>
-                    <Card sx={{ Width: 100, Height: 100 }}>
-                        <CardMedia component='img' image={`/type/${excer.type}.png`} />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">name:{excer.name}</Typography>
-                            <Typography gutterBottom variant="h5" component="div"> difficulty: {excer.difficulty}</Typography>
-                        </CardContent>
-                    </Card>
+                    <Link to={`/fitness/${excersie}/${excer.name}`}>
+                        <Card sx={{ Width: 100, Height: 100 }}>
+                            <CardMedia component='img' image={`/type/${excer.type}.png`} />
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">name:{excer.name}</Typography>
+                                <Typography gutterBottom variant="h5" component="div"> difficulty: {excer.difficulty}</Typography>
+                            </CardContent>
+                        </Card>
+                    </Link>
                 </ListItem>
             })}
         </List>
