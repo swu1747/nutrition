@@ -71,5 +71,8 @@ export const fetchExerciseList = (state) => {
 export const fetchDifficulty = (state) => {
     return state.muscleExercise.difficulty
 }
+export const fetchtype = (state) => {
+    return state.muscleExercise.type
+}
 export const { setmuscle, setPage, setType, setDifficulty } = muscleExercise.actions
 export default muscleExercise.reducer
