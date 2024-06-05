@@ -2,7 +2,10 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const { admin } = require('./firebase/firebaseAdmin')
-const getExercise = require('./ninjaApi/exercise').getExercise
+const api = require('./ninjaApi/ninjaApi')
+
+const getExercise = api.getExercise
+const getCalBurn = api.getCalBurn
 
 
 const app = express()
@@ -22,8 +25,15 @@ app.use((req, res, next) => {
 })
 app.get('/exercise', async (req, res, next) => {
     try {
-        console.log(req.query)
         const response = await getExercise(req.query)
+        res.send(response.data)
+    } catch (error) {
+        throw error
+    }
+})
+app.get('/caloriesburned', async (req, res, next) => {
+    try {
+        const response = await getCalBurn(req.query)
         res.send(response.data)
     } catch (error) {
         throw error

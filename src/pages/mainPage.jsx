@@ -13,8 +13,9 @@ const Main = () => {
     return (<div>
         <Avatar src={photo}></Avatar>
         I'm Main page
-        <Logout />
-        <Link to='/fitness' >fitness</Link>
+        <Logout /><br/>
+        <Link to='/fitness' >fitness</Link><br/>
+        <Link to={'/record'}>record</Link>
     </div>)
 }
 export default Main

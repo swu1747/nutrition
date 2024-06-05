@@ -10,7 +10,6 @@ const ExcerciseDetail = () => {
     const detail = useSelector((state) => {
         return fetchExercise(state, excersie)
     })
-    console.log(detail)
     return (<Card>
         <CardContent>
             <Typography>{detail.name}</Typography>

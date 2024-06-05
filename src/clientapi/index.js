@@ -12,3 +12,13 @@ export const getExercise = async ({ type, muscle, difficulty, offset }) => {
     }
 }
 
+export const getCalBurn = async ({ activity }) => {
+    try {
+        return apiRequest.get('/caloriesburned', {
+            params: { activity }
+        })
+    } catch (error) {
+        throw error
+    }
+}
+

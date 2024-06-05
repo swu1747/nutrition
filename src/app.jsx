@@ -11,6 +11,9 @@ import SignUp from "./pages/signUp.jsx";
 import Fitness from "./pages/fitnessPage.jsx";
 import FitnessSearch from "./pages/fitnessSearchPage.jsx";
 import ExcerciseDetail from "./pages/fitnessDetailPage.jsx";
+import EatFood from "./pages/Eatfood.jsx";
+import CalBurn from "./pages/CalBurn.jsx";
+import RecordPage from "./pages/recordPage.jsx";
 export const App = () => {
     return (<>
         <Router>
@@ -20,6 +23,9 @@ export const App = () => {
                     <Route path="/fitness" element={<Fitness />} />
                     <Route path="/fitness/:excersie" element={<FitnessSearch />} />
                     <Route path="/fitness/:excersie/:name" element={< ExcerciseDetail />} />
+                    <Route path="/record" element={<RecordPage />} />
+                    <Route path="/eatfood" element={<EatFood />} />
+                    <Route path="/calburn" element={<CalBurn />} />
                 </Route>
                 <Route path="signin" element={<SignIn />} />
                 <Route path="signup" element={<SignUp />} />
