@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { AppBar, Autocomplete, Button, Card, CardActions, CardContent, CardHeader, Collapse, TextField, Typography } from "@mui/material";
 import { getCalBurn } from "../clientapi";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchItem, getSearchRes, fetchSearchRes, fetchStatus, changeExpand } from '../feature/calburnslice'
 import { List, ListItem } from "@mui/material";
 import debounce from "../components/debounce";
+import TimeSetter from "../components/timesetter.jsx";
 const CalBurn = () => {
     const dispath = useDispatch()
     const resStatus = useSelector(fetchStatus)
@@ -57,7 +55,7 @@ const CalBurn = () => {
                     <CardActions>
                         <Button value={item.name} onClick={expandHandler}>select</Button>
                     </CardActions>
-                    <Collapse in={item.expand} unmountOnExit>hahah</Collapse>
+                    <Collapse in={item.expand} unmountOnExit><TimeSetter /></Collapse>
                 </Card>
             </ListItem>)}
         </List>}
@@ -65,6 +63,3 @@ const CalBurn = () => {
 }
 export default CalBurn
 
-{/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-<TimePicker  />
-</LocalizationProvider> */}
