@@ -16,6 +16,14 @@ const getCalBurn = async ({ activity }) => {
         throw error
     }
 }
+const getNuitrition = async ({ query }) => {
+    try {
+        return apiRequest.get('/nutrition', { params: { query } })
+    } catch (error) {
+        throw error
+    }
+}
 
 module.exports.getExercise = getExercise
 module.exports.getCalBurn = getCalBurn
+module.exports.getNuitrition = getNuitrition
