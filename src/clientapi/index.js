@@ -22,3 +22,7 @@ export const getCalBurn = async ({ activity }) => {
     }
 }
 
+export const nuitrisearch = async () => {
+
+}
+
