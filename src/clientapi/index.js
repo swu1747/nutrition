@@ -22,7 +22,23 @@ export const getCalBurn = async ({ activity }) => {
     }
 }
 
-export const nuitrisearch = async () => {
+export const nuitrisearch = async ({ search_expression }) => {
+    try {
+        return apiRequest('/nuitrisearch', {
+            params: { search_expression }
+        })
+    } catch (error) {
+        throw error
+    }
+}
 
+export const getNuitrition = async ({ food_id }) => {
+    try {
+        return apiRequest('/nuitrition', {
+            params: { food_id }
+        })
+    } catch (error) {
+        throw error
+    }
 }
 

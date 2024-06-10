@@ -7,8 +7,7 @@ const { default: axios } = require('axios')
 const nuitritionApi = require('./fatscretApi/nuitritionApi').nuitritionApi
 const getExercise = api.getExercise
 const getCalBurn = api.getCalBurn
-const getNuitrition = api.getNuitrition
-
+// const getNuitrition = api.getNuitrition
 
 
 const app = express()
@@ -61,15 +60,16 @@ app.get('/nuitrition', async (req, res, next) => {
 })
 app.get('/nuitrisearch', async (req, res, next) => {
     try {
-        const response = await (getNuitrition.get('', {
+        const response = await nuitruiApi.get('', {
             params: {
                 search_expression: req.query.search_expression,
                 format: 'json',
-                method: 'food.get.v4'
+                method: 'foods.search'
             }
-        }))
-        console.log('???', response.foods)
-        res.send(response.foods)
+        })
+        // console.log('>>>',req.query.search_expression)
+        // console.log('???', response.data.foods.food)
+        res.send(response.data.foods.food)
     } catch (error) {
         throw error
     }
