@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import { Autocomplete, Button, TextField } from "@mui/material";
+import { Autocomplete, Button, CardContent, TextField, Typography, Card, List } from "@mui/material";
 import { nuitrisearch } from "../clientapi";
+import { getStatus, getfood, getsearchRes, setStatus, setFood, fetchNuitriList } from "../feature/nuitriSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const EatFood = () => {
+    const dispath = useDispatch()
     const [search, setSearch] = useState([])
-    const [food, setfood] = useState('')
+    const status = useSelector(getStatus)
+    const nuitrilist = useSelector(getsearchRes)
     const inputhandler = async (e) => {
         try {
             const temp = e.target.innerHTML || e.target.value
+            dispath(setFood(temp))
             if (temp !== '') {
                 const res = await nuitrisearch({ search_expression: temp })
                 if (Array.isArray(res.data)) {
-                    console.log(res.data)
                     setSearch(res.data)
                 } else {
                     setSearch([])
@@ -23,13 +28,8 @@ const EatFood = () => {
             throw error
         }
     }
-    const searchNuitri = async () => {
-        try {
-            const res = await nuitrisearch({ search_expression: search })
-            console.log(res)
-        } catch (error) {
-            throw error
-        }
+    const searchNuitri = () => {
+        dispath(fetchNuitriList())
     }
     return <>
         <Autocomplete
@@ -44,7 +44,7 @@ const EatFood = () => {
             renderInput={
                 (params) => {
                     return <TextField {...params}
-                        label='searcsh'
+                        label='search'
                     />
                 }
             }
@@ -59,6 +59,14 @@ const EatFood = () => {
             }
             onInputChange={inputhandler} />
         <Button onClick={searchNuitri}>search</Button>
+        {status === 'idle' ? <div></div> : <List>{
+            nuitrilist.map((food) => {
+                return <Link key={food.food_id} to={`/eatfood/${food.food_id}`}><Card  >
+                    <CardContent><Typography>{food.food_name}</Typography></CardContent>
+                    <CardContent><Typography>{food.food_description}</Typography></CardContent>
+                </Card></Link>
+            })}
+        </List>}
     </>
 }
 

@@ -14,6 +14,7 @@ import ExcerciseDetail from "./pages/fitnessDetailPage.jsx";
 import EatFood from "./pages/Eatfood.jsx";
 import CalBurn from "./pages/CalBurn.jsx";
 import RecordPage from "./pages/recordPage.jsx";
+import FoodDetail from "./pages/foodDetail.jsx";
 export const App = () => {
     return (<>
         <Router>
@@ -26,6 +27,7 @@ export const App = () => {
                     <Route path="/record" element={<RecordPage />} />
                     <Route path="/eatfood" element={<EatFood />} />
                     <Route path="/calburn" element={<CalBurn />} />
+                    <Route path="/eatfood/:food_id" element={<FoodDetail />} />
                 </Route>
                 <Route path="signin" element={<SignIn />} />
                 <Route path="signup" element={<SignUp />} />

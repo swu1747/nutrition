@@ -52,8 +52,7 @@ app.get('/nuitrition', async (req, res, next) => {
                 method: 'food.get.v4'
             }
         })
-        console.log('res', response.food)
-        res.send(response.food)
+        res.send(response.data.food)
     } catch (error) {
         throw error
     }
@@ -67,8 +66,6 @@ app.get('/nuitrisearch', async (req, res, next) => {
                 method: 'foods.search'
             }
         })
-        // console.log('>>>',req.query.search_expression)
-        // console.log('???', response.data.foods.food)
         res.send(response.data.foods.food)
     } catch (error) {
         throw error

@@ -7,6 +7,7 @@ import calburnsliceReducers from "./feature/calburnslice";
 import settimerReducers from './feature/timeSetterSlice'
 import { setStart, setEnd } from "./feature/timeSetterSlice";
 import nuitriSliceReducers from "./feature/nuitriSlice";
+import FoodDetailReducers from "./feature/nuitriSlice";
 export default configureStore({
     reducer: {
         user: UserInfoReducers,
@@ -15,7 +16,8 @@ export default configureStore({
         muscleExercise: muscleExerciseReudcers,
         calBurn: calburnsliceReducers,
         settime: settimerReducers,
-        nuitritionSearch: nuitriSliceReducers
+        nuitritionSearch: nuitriSliceReducers,
+        foodDetail: FoodDetailReducers
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
