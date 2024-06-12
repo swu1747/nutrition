@@ -7,7 +7,7 @@ import calburnsliceReducers from "./feature/calburnslice";
 import settimerReducers from './feature/timeSetterSlice'
 import { setStart, setEnd } from "./feature/timeSetterSlice";
 import nuitriSliceReducers from "./feature/nuitriSlice";
-import FoodDetailReducers from "./feature/nuitriSlice";
+import FoodDetailReducers from './feature/foodDetailSlice'
 export default configureStore({
     reducer: {
         user: UserInfoReducers,
