@@ -4,13 +4,13 @@ import { getNuitrition } from "../clientapi";
 const initialState = {
     food_name: '',
     food: [],
-    
 }
 
 const foodDetail = createSlice({
     name: 'foodDetail',
     initialState: initialState,
     reducers: {
+
     },
     extraReducers: (builder) => {
         builder.addCase(fetchNutri.fulfilled, (state, action) => {
@@ -28,4 +28,10 @@ export const fetchNutri = createAsyncThunk('/fetchNutri', async (food_id) => {
 
 export const getFoodName = (state) => state.foodDetail.food_name
 export const getFood = (state) => state.foodDetail.food
+export const getServing = (state, size) => {
+    if (!state.foodDetail.food.length) {
+        return ''
+    }
+    return size !== '' ? state.foodDetail.food.find((item) => item.serving_description === size) : state.foodDetail.food[0]
+}
 export default foodDetail.reducer

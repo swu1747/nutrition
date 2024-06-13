@@ -1,20 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchNutri, getFood, getFoodName } from "../feature/foodDetailSlice";
+import { fetchNutri, getFood, getFoodName, getServing } from "../feature/foodDetailSlice";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import CalFact from "../components/calFact.jsx";
 
 const FoodDetail = () => {
+
     const param = useParams()
     const food_id = param.food_id
     const dispath = useDispatch()
     const nutriList = useSelector(getFood)
     const food_name = useSelector(getFoodName)
+    const [serving, setServing] = useState('')
+    const servingHandler = (e) => {
+        setServing(e.target.value)
+    }
     useEffect(() => {
         dispath(fetchNutri(food_id))
     }, [])
     return <>
         {food_name}<br />
-        {nutriList.length}
+        <FormControl fullWidth >
+            <InputLabel >serving size</InputLabel>
+            <Select value={serving} onChange={servingHandler}>
+                {nutriList.map((item) => <MenuItem value={item.serving_description} key={item.serving_id}>{item.serving_description}</MenuItem>)}
+            </Select>
+        </FormControl>
+        <CalFact cur={serving} />
     </>
 }
 
