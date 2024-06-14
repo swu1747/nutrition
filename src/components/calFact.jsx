@@ -2,17 +2,22 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { getServing } from "../feature/foodDetailSlice";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts";
-import { Paper } from "@mui/material";
+import { Divider, Paper, Stack, Typography } from "@mui/material";
+import { Round2D, percentile } from "./round2D";
+const deviderStyle = {
+    border: '1px solid',
+    borderColor: 'grey',
+}
 
 const CalFact = ({ cur }) => {
     const cal = useSelector((state) => {
         return getServing(state, cur)
     })
-    const sum = Math.round((+cal.fat + (+cal.protein) + (+cal.carbohydrate)) * 100) / 100
+    const sum = Round2D((+cal.fat + (+cal.protein) + (+cal.carbohydrate)))
     const data1 = [
-        { id: 0, value: cal.fat, label: `${Math.round((+(cal.fat) / sum) * 100)}% fat: ${Math.round(+cal.fat * 100) / 100} g`, color: '#5BD1D7' },
-        { id: 1, value: cal.protein, label: `${Math.round((+(cal.protein) / sum) * 100)}% protein: ${Math.round(+cal.protein * 100) / 100} g`, color: '#F0BF4C' },
-        { id: 2, value: cal.carbohydrate, label: `${Math.round((+(cal.carbohydrate) / sum) * 100)}% carb: ${Math.round(+cal.carbohydrate * 100) / 100} g`, color: '#F59794' },
+        { id: 0, value: cal.fat, label: `${percentile(+cal.fat, sum)}% fat: ${Round2D(cal.fat)} g`, color: '#5BD1D7' },
+        { id: 1, value: cal.protein, label: `${percentile(+cal.protein, sum)}% protein: ${Round2D(cal.protein)} g`, color: '#F0BF4C' },
+        { id: 2, value: cal.carbohydrate, label: `${percentile(+cal.carbohydrate, sum)}% carb: ${Round2D(cal.carbohydrate)} g`, color: '#F59794' },
     ]
     const data2 = [
         { value: Math.round(cal.calories), color: 'black' }
@@ -32,6 +37,9 @@ const CalFact = ({ cur }) => {
             arcLabel: (item) => `${item.value} \n Calories`,
         }
     ]
+    if (cal === '') {
+        return (<></>)
+    }
     return <>
         <PieChart
             series={series}
@@ -47,10 +55,370 @@ const CalFact = ({ cur }) => {
             }}
         />
         <Paper elevation={3} sx={{
-            width: 500,
-            height: 400,
+            padding: '19px',
+            width: 280,
+            border: '2px solid grey',
+            borderRadius: 0,
+        }}>
+            <Stack direction='row' justifyContent="space-between">
+                <Typography sx={{ fontSize: 22, fontWeight: 900 }}>
+                    Nutrition Facts
+                </Typography>
 
-        }}></Paper>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' justifyContent="space-between"
+                sx={{ height: '32px' }}
+            >
+                <Typography sx={{
+                    lineHeight: '32px',
+                    fontSize: 13, fontWeight: 900
+                }}>
+                    serving size
+                </Typography>
+                <Typography sx={{
+                    lineHeight: '32px',
+                    fontSize: 13, fontWeight: 900
+                }}>
+                    {`${cal.serving_description}`}
+                </Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' justifyContent="space-between"
+                sx={{
+                    height: '45px'
+                }}
+            >
+                <Stack>
+                    <Typography sx={{
+                        height: '11px',
+                        lineHeight: '11px',
+                        fontSize: '11px',
+                        fontWeight: 900
+                    }}>Amount Per Serving
+                    </Typography>
+                    <Typography sx={{
+                        height: '28px',
+                        lineHeight: '28px',
+                        fontSize: '19px',
+                        fontWeight: 900
+                    }}>Calories
+                    </Typography>
+                </Stack>
+                <Typography sx={{
+                    lineHeight: '45px',
+                    fontSize: '26px',
+                    fontWeight: 900
+                }}>
+                    {Math.round(cal.calories)}
+                </Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Typography align="right"
+                sx={{
+                    height: '18',
+                    lineHeight: '18px',
+                    fontSize: '11px',
+                    fontWeight: 900
+                }}
+            >% Daily Values*</Typography>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' justifyContent="space-between"
+                sx={{ height: 19, lineHeight: 19 }}>
+                <Stack direction='row' spacing={1}>
+                    <Typography sx={{
+                        fontSize: 11,
+                        fontWeight: 900
+                    }}>Total Fat</Typography>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>
+                        {Round2D(cal.fat) + "g"}
+                    </Typography>
+                </Stack >
+                <Typography sx={{
+                    fontSize: 11,
+                    fontWeight: 900
+                }}>{percentile(+cal.fat, 60)}%</Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' justifyContent="space-between"
+                sx={{ height: 19, lineHeight: 19 }}>
+                <Stack direction='row' spacing={1} sx={
+                    {
+                        marginLeft: 1
+                    }
+                }>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>Saturated Fat</Typography>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>
+                        {Round2D(cal.saturated_fat) + 'g'}
+                    </Typography>
+                </Stack>
+                <Typography sx={{
+                    fontSize: 11,
+                    fontWeight: 900
+                }}> {percentile(cal.saturated_fat, 22) + '%'}</Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' spacing={1}
+                sx={{ height: 19, lineHeight: 19, marginLeft: 1 }}>
+                <Typography sx={{
+                    fontSize: 11
+                }}>Trans Fat</Typography>
+                <Typography sx={{
+                    fontSize: 11
+                }}>
+                    {Round2D(cal.trans_fat) + 'g'}
+                </Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' spacing={1}
+                sx={{ height: 19, lineHeight: 19, marginLeft: 1 }}>
+                <Typography sx={{
+                    fontSize: 11
+                }}>Polyunsaturated Fat</Typography>
+                <Typography sx={{
+                    fontSize: 11
+                }}>
+                    {Round2D(cal.polyunsaturated_fat) + 'g'}
+                </Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' spacing={1}
+                sx={{ height: 19, lineHeight: 19, marginLeft: 1 }}>
+                <Typography sx={{
+                    fontSize: 11
+                }}>Monounsaturated Fat</Typography>
+                <Typography sx={{
+                    fontSize: 11
+                }}>
+                    {Round2D(cal.monounsaturated_fat) + 'g'}
+                </Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' justifyContent="space-between"
+                sx={{ height: 19, lineHeight: 19 }}>
+                <Stack direction='row' spacing={1}>
+                    <Typography sx={{
+                        fontSize: 11,
+                        fontWeight: 900
+                    }}>Cholesterol</Typography>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>
+                        {Round2D(cal.cholesterol) + "mg"}
+                    </Typography>
+                </Stack >
+                <Typography sx={{
+                    fontSize: 11,
+                    fontWeight: 900
+                }}>{percentile(+cal.cholesterol, 300)}%</Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' justifyContent="space-between"
+                sx={{ height: 19, lineHeight: 19 }}>
+                <Stack direction='row' spacing={1}>
+                    <Typography sx={{
+                        fontSize: 11,
+                        fontWeight: 900
+                    }}>Sodium</Typography>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>
+                        {Round2D(cal.sodium) + "mg"}
+                    </Typography>
+                </Stack >
+                <Typography sx={{
+                    fontSize: 11,
+                    fontWeight: 900
+                }}>{percentile(+cal.sodium, 2000)}%</Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' justifyContent="space-between"
+                sx={{ height: 19, lineHeight: 19 }}>
+                <Stack direction='row' spacing={1}>
+                    <Typography sx={{
+                        fontSize: 11,
+                        fontWeight: 900
+                    }}>Total Carbohydrate</Typography>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>
+                        {Round2D(cal.carbohydrate) + "mg"}
+                    </Typography>
+                </Stack >
+                <Typography sx={{
+                    fontSize: 11,
+                    fontWeight: 900
+                }}>{percentile(+cal.carbohydrate, 2000)}%</Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' justifyContent="space-between"
+                sx={{ height: 19, lineHeight: 19 }}>
+                <Stack direction='row' spacing={1} sx={
+                    {
+                        marginLeft: 1
+                    }
+                }>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>Dietary Fiber</Typography>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>
+                        {Round2D(cal.fiber) + 'g'}
+                    </Typography>
+                </Stack>
+                <Typography sx={{
+                    fontSize: 11,
+                    fontWeight: 900
+                }}> {percentile(cal.fiber, 28) + '%'}</Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' spacing={1}
+                sx={{ height: 19, lineHeight: 19, marginLeft: 1 }}>
+                <Typography sx={{
+                    fontSize: 11
+                }}>Sugars</Typography>
+                <Typography sx={{
+                    fontSize: 11
+                }}>
+                    {Round2D(cal.sugar) + 'g'}
+                </Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' spacing={1} sx={{ height: 19, lineHeight: 19 }}>
+                <Typography sx={{
+                    fontSize: 11,
+                    fontWeight: 900
+                }}>Protein</Typography>
+                <Typography sx={{
+                    fontSize: 11
+                }}>
+                    {Round2D(cal.protein) + "g"}
+                </Typography>
+            </Stack >
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' justifyContent="space-between"
+                sx={{ height: 19, lineHeight: 19 }}>
+                <Stack direction='row' spacing={1}>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>Vitamin D</Typography>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>
+                        {Round2D(cal.vitamin_d) + 'mg'}
+                    </Typography>
+                </Stack>
+                <Typography sx={{
+                    fontSize: 11,
+                    fontWeight: 900
+                }}> {percentile(cal.vitamin_d, 20) + '%'}</Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' justifyContent="space-between"
+                sx={{ height: 19, lineHeight: 19 }}>
+                <Stack direction='row' spacing={1}>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>Calcium</Typography>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>
+                        {Round2D(cal.calcium) + 'mg'}
+                    </Typography>
+                </Stack>
+                <Typography sx={{
+                    fontSize: 11,
+                    fontWeight: 900
+                }}> {percentile(cal.calcium, 1000) + '%'}</Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' justifyContent="space-between"
+                sx={{ height: 19, lineHeight: 19 }}>
+                <Stack direction='row' spacing={1}>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>Iron</Typography>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>
+                        {Round2D(cal.iron) + 'mg'}
+                    </Typography>
+                </Stack>
+                <Typography sx={{
+                    fontSize: 11,
+                    fontWeight: 900
+                }}> {percentile(cal.iron, 8) + '%'}</Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' justifyContent="space-between"
+                sx={{ height: 19, lineHeight: 19 }}>
+                <Stack direction='row' spacing={1}>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>Potassium</Typography>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>
+                        {Round2D(cal.potassium) + 'mg'}
+                    </Typography>
+                </Stack>
+                <Typography sx={{
+                    fontSize: 11,
+                    fontWeight: 900
+                }}> {percentile(cal.potassium, 3400) + '%'}</Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' justifyContent="space-between"
+                sx={{ height: 19, lineHeight: 19 }}>
+                <Stack direction='row' spacing={1}>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>Vitamin A</Typography>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>
+                        {Round2D(cal.vitamin_a) + 'mg'}
+                    </Typography>
+                </Stack>
+                <Typography sx={{
+                    fontSize: 11,
+                    fontWeight: 900
+                }}> {percentile(cal.vitamin_a, 900) + '%'}</Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Stack direction='row' justifyContent="space-between"
+                sx={{ height: 19, lineHeight: 19 }}>
+                <Stack direction='row' spacing={1}>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>Vitamin C</Typography>
+                    <Typography sx={{
+                        fontSize: 11
+                    }}>
+                        {Round2D(cal.vitamin_c) + 'mg'}
+                    </Typography>
+                </Stack>
+                <Typography sx={{
+                    fontSize: 11,
+                    fontWeight: 900
+                }}> {percentile(cal.vitamin_c, 1000) + '%'}</Typography>
+            </Stack>
+            <Divider sx={deviderStyle} />
+            <Typography
+                sx={{
+                    fontSize: 9
+                }}
+            >* The % Daily Value (DV) tells you how much a nutrient in a serving of
+                food contributes to a daily diet. 2,000 calories a day is used
+                for general nutrition advice.</Typography>
+        </Paper>
     </>
 }
 
