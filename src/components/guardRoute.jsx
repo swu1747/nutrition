@@ -17,7 +17,6 @@ const PrivateRoute = () => {
             if (user) {
                 const PhotoRef = ref(storage, user.photoURL);
                 user.getIdToken().then((token) => {
-                    console.log('i am token', token)
                     document.cookie = `token=${token}`
                 })
                 dispatch(fetchphoto(PhotoRef))

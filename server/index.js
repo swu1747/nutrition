@@ -20,7 +20,8 @@ app.use((req, res, next) => {
     if (!token) {
         res.redirect('/')
     } else {
-        admin.auth().verifyIdToken(token).then((message) => {
+        admin.auth().verifyIdToken(token).then((decodedToken) => {
+            req.uid = decodedToken.uid
             next()
         }).catch(() => {
             res.redirect('/')
