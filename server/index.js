@@ -5,16 +5,29 @@ const { admin } = require('./firebase/firebaseAdmin')
 const api = require('./ninjaApi/ninjaApi')
 const { default: axios } = require('axios')
 const nuitritionApi = require('./fatscretApi/nuitritionApi').nuitritionApi
+const bodyParser = require('body-parser')
+
 const getExercise = api.getExercise
 const getCalBurn = api.getCalBurn
+const { addCalBurn,
+    fetchCalBydate,
+    addCalPerDay,
+    fetchSingleDayTotalCal,
+    fetchRangeDayTotalCal,
+    incrementSingleDayCal,
+    addNuitri,
+    findNutriSingleDay,
+    findNutriRangedDay } = require('../database/createTable')
 // const getNuitrition = api.getNuitrition
 
 
 const app = express()
 let access_token
 let nuitruiApi
-app.use(cookieParser())
+// app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '../dist')))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => {
     const token = req.cookies.token
     if (!token) {
@@ -26,6 +39,14 @@ app.use((req, res, next) => {
         }).catch(() => {
             res.redirect('/')
         })
+    }
+})
+app.post('/addcalburn', async (req, res, next) => {
+    console.log(req.body)
+    try {
+
+    } catch (err) {
+        throw err
     }
 })
 app.get('/exercise', async (req, res, next) => {

@@ -55,7 +55,7 @@ const CalBurn = () => {
                     <CardActions>
                         <Button value={item.name} onClick={expandHandler}>select</Button>
                     </CardActions>
-                    <Collapse in={item.expand} unmountOnExit><TimeSetter value={item.calories_per_hour} /></Collapse>
+                    <Collapse in={item.expand} unmountOnExit><TimeSetter exercise={item.name} value={item.calories_per_hour} /></Collapse>
                 </Card>
             </ListItem>)}
         </List>}

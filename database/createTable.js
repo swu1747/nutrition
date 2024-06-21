@@ -125,9 +125,22 @@ const findNutriRangedDay = async (userid, startdate, enddate) => {
         throw error;
     }
 }
-findNutriRangedDay('123', '2024-06-19', '2024-06-28').then((res) => {
-    console.log(res)
-})
+
+module.exports = {
+    addCalBurn,
+    fetchCalBydate,
+    addCalPerDay,
+    fetchSingleDayTotalCal,
+    fetchRangeDayTotalCal,
+    incrementSingleDayCal,
+    addNuitri,
+    findNutriSingleDay,
+    findNutriRangedDay
+
+}
+// findNutriRangedDay('123', '2024-06-19', '2024-06-28').then((res) => {
+//     console.log(res)
+// })
 // findNutriSingleDay('123', '2024-06-19').then((res) => {
 //     console.log(res.rows)
 // })

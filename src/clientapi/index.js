@@ -42,3 +42,12 @@ export const getNuitrition = async ({ food_id }) => {
     }
 }
 
+export const addcalburn = async ({ exercise, userid, starttime, endtime, calpermin, totalCal }) => {
+    try {
+        return apiRequest.post('/addcalburn', {
+            exercise, userid, starttime, endtime, calpermin, totalCal
+        })
+    } catch (error) {
+        throw (error)
+    }
+}

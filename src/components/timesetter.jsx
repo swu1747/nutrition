@@ -7,7 +7,8 @@ import { setEnd, setStart, start, end } from "../feature/timeSetterSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Typography } from "@mui/material";
 import { changeExpand } from "../feature/calburnslice";
-const TimeSetter = ({ value }) => {
+import { addcalburn } from "../clientapi";
+const TimeSetter = ({ value, exercise }) => {
     const dispath = useDispatch()
     const startTime = useSelector(start)
     const endTime = useSelector(end)
@@ -15,7 +16,8 @@ const TimeSetter = ({ value }) => {
         dispath(changeExpand(''))
         const BurnPerMin = Math.floor(value / 60)
         const totalBurn = Math.floor(BurnPerMin * ((endTime.unix() - startTime.unix()) / 60))
-        console.log( endTime.format(), startTime.format(), totalBurn, BurnPerMin)
+        addcalburn(exercise, '123123', startTime.format(), endTime.format(), BurnPerMin, totalBurn)
+        // console.log(endTime.format(), startTime.format(), totalBurn, BurnPerMin)
     }
     return <>
         <Typography>
