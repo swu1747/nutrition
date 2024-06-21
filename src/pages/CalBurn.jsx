@@ -6,6 +6,7 @@ import { setSearchItem, getSearchRes, fetchSearchRes, fetchStatus, changeExpand 
 import { List, ListItem } from "@mui/material";
 import debounce from "../components/debounce";
 import TimeSetter from "../components/timesetter.jsx";
+import BurnCalModal from "../components/modal.jsx";
 const CalBurn = () => {
     const dispath = useDispatch()
     const resStatus = useSelector(fetchStatus)
@@ -59,6 +60,7 @@ const CalBurn = () => {
                 </Card>
             </ListItem>)}
         </List>}
+        <BurnCalModal />
     </>
 }
 export default CalBurn

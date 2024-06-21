@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Typography } from "@mui/material";
 import { changeExpand } from "../feature/calburnslice";
 import { addcalburn } from "../clientapi";
+import { changeModal } from "../feature/calburnslice";
 const TimeSetter = ({ value, exercise }) => {
     const dispath = useDispatch()
     const startTime = useSelector(start)
@@ -18,7 +19,7 @@ const TimeSetter = ({ value, exercise }) => {
         const totalCal = Math.floor(calpermin * ((endTime.unix() - startTime.unix()) / 60))
         if (endTime.diff(startTime) > 0) {
             addcalburn(exercise, startTime.format(), endTime.format(), calpermin, totalCal).then((res) => {
-                console.log(res)
+                dispath(changeModal())
             })
         } else {
             console.log('invalid time')

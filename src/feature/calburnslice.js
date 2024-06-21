@@ -41,7 +41,7 @@ export const fetchSearchRes = createAsyncThunk('searchRes', async (_, { getState
     const res = await getCalBurn(param)
     return res.data
 })
-export const { setSearchItem, changeExpand } = calBurnSlice.actions
+export const { setSearchItem, changeExpand,changeModal } = calBurnSlice.actions
 export const fetchSearchItem = (state) => {
     return state.calBurn.searchItem
 }

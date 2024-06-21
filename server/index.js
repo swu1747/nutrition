@@ -17,10 +17,9 @@ const { addCalBurn,
     addNuitri,
     findNutriSingleDay,
     findNutriRangedDay } = require('../database/createTable')
-// const getNuitrition = api.getNuitrition
-
 
 const app = express()
+
 let access_token
 let nuitruiApi
 app.use(cookieParser())
