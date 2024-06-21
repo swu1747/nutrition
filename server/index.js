@@ -5,8 +5,7 @@ const { admin } = require('./firebase/firebaseAdmin')
 const api = require('./ninjaApi/ninjaApi')
 const { default: axios } = require('axios')
 const nuitritionApi = require('./fatscretApi/nuitritionApi').nuitritionApi
-const bodyParser = require('body-parser')
-
+const dayjs = require('dayjs')
 const getExercise = api.getExercise
 const getCalBurn = api.getCalBurn
 const { addCalBurn,
@@ -24,10 +23,9 @@ const { addCalBurn,
 const app = express()
 let access_token
 let nuitruiApi
-// app.use(cookieParser())
+app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '../dist')))
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json())
 app.use((req, res, next) => {
     const token = req.cookies.token
     if (!token) {
@@ -41,20 +39,82 @@ app.use((req, res, next) => {
         })
     }
 })
-app.post('/addcalburn', async (req, res, next) => {
-    console.log(req.body)
-    try {
 
-    } catch (err) {
-        throw err
+app.post('/addnuitri', async (req, res) => {
+    const { fat, saturated_fat, trans_fat, monounsaturated_fat, polyunsaturated_fat, protein, calories, carbohydrate, cholesterol, sodium, potassium, fiber, sugar, vitamin_a, vitamin_c, calcium, iron, food
+    } = req.body
+    try {
+        const response = addNuitri(req.uid, fat, saturated_fat, trans_fat, monounsaturated_fat, polyunsaturated_fat, protein, calories, carbohydrate, cholesterol, sodium, potassium, fiber, sugar, vitamin_a, vitamin_c, calcium, iron, food)
+        res.send(response)
+    } catch (error) {
+        console.log(error)
     }
+})
+app.get('/getsdnuitri', async (req, res) => {
+    try {
+        const { date } = req.query
+        const response = findNutriSingleDay(req.uid, date)
+        res.send(response)
+    } catch (error) {
+        console.log(error)
+    }
+})
+app.get('/getrangedaynuitri', async (req, res) => {
+    try {
+        const { startdate, enddate } = req.query
+        const response = findNutriRangedDay(req.uid, startdate, enddate)
+        res.send(response)
+    } catch (error) {
+        console.log(error)
+    }
+})
+app.post('/addcalburn', async (req, res, next) => {
+    try {
+        const { exercise, starttime, endtime, calpermin, totalCal } = req.body
+        const today = dayjs(starttime).format('YYYY-MM-DD')
+        const userid = req.uid
+        await addCalBurn(exercise, userid, starttime, endtime, calpermin)
+        const daycal = await fetchSingleDayTotalCal(userid, today)
+        if (daycal.length === 0) {
+            await addCalPerDay(userid, totalCal)
+        } else {
+            await incrementSingleDayCal(userid, today, totalCal)
+        }
+        res.send('success')
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+app.get('/singledaycal', async (req, res, next) => {
+    try {
+        const date = req.query.date
+        const response = await fetchSingleDayTotalCal(req.uid, date)
+        res.send(response)
+    } catch (error) {
+        console.log(error)
+    }
+})
+app.get('/singledaycaldetail', async (req, res) => {
+    try {
+        const date = req.query.date
+        const response = await fetchCalBydate(date, req.uid)
+        res.send(response)
+    } catch (error) {
+        console.log(error)
+    }
+})
+app.get('/rangeddayscal', async (req, res, next) => {
+    const { startdate, enddate } = req.query
+    const response = await fetchRangeDayTotalCal(req.uid, startdate, enddate)
+    res.send(response)
 })
 app.get('/exercise', async (req, res, next) => {
     try {
         const response = await getExercise(req.query)
         res.send(response.data)
     } catch (error) {
-        throw error
+        console.log(error)
     }
 })
 app.get('/caloriesburned', async (req, res, next) => {
@@ -62,7 +122,7 @@ app.get('/caloriesburned', async (req, res, next) => {
         const response = await getCalBurn(req.query)
         res.send(response.data)
     } catch (error) {
-        throw error
+        console.log(error)
     }
 })
 app.get('/nuitrition', async (req, res, next) => {
@@ -76,7 +136,7 @@ app.get('/nuitrition', async (req, res, next) => {
         })
         res.send(response.data.food)
     } catch (error) {
-        throw error
+        console.log(error)
     }
 })
 app.get('/nuitrisearch', async (req, res, next) => {
@@ -90,7 +150,7 @@ app.get('/nuitrisearch', async (req, res, next) => {
         })
         res.send(response.data.foods.food)
     } catch (error) {
-        throw error
+        console.log(error)
     }
 })
 

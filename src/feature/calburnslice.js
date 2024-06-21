@@ -4,7 +4,8 @@ import { getCalBurn } from "../clientapi";
 const initialState = {
     status: 'idle',
     searchItem: '',
-    searchRes: []
+    searchRes: [],
+    openModal: false
 }
 
 const calBurnSlice = createSlice({
@@ -18,6 +19,9 @@ const calBurnSlice = createSlice({
             state.searchRes.forEach((item) => {
                 item.expand = item.name === action.payload ? true : false
             })
+        },
+        changeModal: (state) => {
+            state.openModal = !state.openModal
         }
     },
     extraReducers: (builder) => {
@@ -46,6 +50,9 @@ export const fetchStatus = (state) => {
 }
 export const getSearchRes = (state) => {
     return state.calBurn.searchRes
+}
+export const getModal = (state) => {
+    return state.calBurn.openModal
 }
 
 export default calBurnSlice.reducer

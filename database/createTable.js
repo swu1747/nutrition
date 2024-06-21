@@ -23,7 +23,6 @@ const addCalBurn = async (exercise, userid, starttime, endtime, calpermin) => {
         return res;
     } catch (error) {
         console.error('Error inserting data:', error);
-        throw error; // Optionally re-throw the error to handle it further up the call stack
     }
 };
 const fetchCalBydate = async (date, userid) => {

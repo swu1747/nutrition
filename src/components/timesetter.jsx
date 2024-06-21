@@ -14,10 +14,15 @@ const TimeSetter = ({ value, exercise }) => {
     const endTime = useSelector(end)
     const submithandler = () => {
         dispath(changeExpand(''))
-        const BurnPerMin = Math.floor(value / 60)
-        const totalBurn = Math.floor(BurnPerMin * ((endTime.unix() - startTime.unix()) / 60))
-        addcalburn(exercise, '123123', startTime.format(), endTime.format(), BurnPerMin, totalBurn)
-        // console.log(endTime.format(), startTime.format(), totalBurn, BurnPerMin)
+        const calpermin = Math.floor(value / 60)
+        const totalCal = Math.floor(calpermin * ((endTime.unix() - startTime.unix()) / 60))
+        if (endTime.diff(startTime) > 0) {
+            addcalburn(exercise, startTime.format(), endTime.format(), calpermin, totalCal).then((res) => {
+                console.log(res)
+            })
+        } else {
+            console.log('invalid time')
+        }
     }
     return <>
         <Typography>
