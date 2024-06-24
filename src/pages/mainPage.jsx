@@ -12,10 +12,10 @@ const Main = () => {
     })
     return (<div>
         <Avatar src={photo}></Avatar>
-        I'm Main page
         <Logout /><br/>
+
         <Link to='/fitness' >fitness</Link><br/>
-        <Link to={'/record'}>record</Link>
+        <Link to='/record'>record</Link>
     </div>)
 }
 export default Main

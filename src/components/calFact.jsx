@@ -1,19 +1,25 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { getServing } from "../feature/foodDetailSlice";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getFoodName, getServing } from "../feature/foodDetailSlice";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts";
-import { Divider, Paper, Stack, Typography } from "@mui/material";
+import { Button, Divider, MenuItem, Paper, Select, Stack, Typography } from "@mui/material";
 import { Round2D, percentile } from "./round2D";
+import { addnuitri } from "../clientapi";
+import { changeFoodModal } from "../feature/foodDetailSlice";
 const deviderStyle = {
     border: '1px solid',
     borderColor: 'grey',
 }
+const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 const CalFact = ({ cur }) => {
+    const dispath = useDispatch()
     const cal = useSelector((state) => {
         return getServing(state, cur)
     })
+    const food = useSelector(getFoodName)
     const sum = Round2D((+cal.fat + (+cal.protein) + (+cal.carbohydrate)))
+    const [amount, setamount] = useState(1)
     const data1 = [
         { id: 0, value: cal.fat, label: `${percentile(+cal.fat, sum)}% fat: ${Round2D(cal.fat)} g`, color: '#5BD1D7' },
         { id: 1, value: cal.protein, label: `${percentile(+cal.protein, sum)}% protein: ${Round2D(cal.protein)} g`, color: '#F0BF4C' },
@@ -37,6 +43,53 @@ const CalFact = ({ cur }) => {
             arcLabel: (item) => `${item.value} \n Calories`,
         }
     ]
+    const changeAmount = (e) => {
+        setamount(e.target.value)
+    }
+    const submitHandler = async () => {
+        const temp = { ...cal }
+        for (const item in temp) {
+            if (!Number.isNaN(temp[item])) {
+                temp[item] = +temp[item] * amount
+            }
+        }
+        const {
+            fat,
+            saturated_fat,
+            trans_fat,
+            monounsaturated_fat,
+            polyunsaturated_fat,
+            protein,
+            calories,
+            carbohydrate,
+            cholesterol,
+            sodium,
+            potassium,
+            fiber, sugar,
+            vitamin_a,
+            vitamin_c,
+            calcium,
+            iron
+        } = temp
+        await addnuitri(fat,
+            saturated_fat,
+            trans_fat,
+            monounsaturated_fat,
+            polyunsaturated_fat,
+            protein,
+            calories,
+            carbohydrate,
+            cholesterol,
+            sodium,
+            potassium,
+            fiber, sugar,
+            vitamin_a,
+            vitamin_c,
+            calcium,
+            iron, food)
+            dispath(changeFoodModal())
+
+    }
     if (cal === '') {
         return (<></>)
     }
@@ -419,6 +472,10 @@ const CalFact = ({ cur }) => {
                 food contributes to a daily diet. 2,000 calories a day is used
                 for general nutrition advice.</Typography>
         </Paper>
+        <Select label='amount' value={amount} onChange={changeAmount}>
+            {nums.map((item) => <MenuItem key={item} value={item}>{item}</MenuItem>)}
+        </Select>
+        <Button onClick={submitHandler}>submit</Button>
     </>
 }
 

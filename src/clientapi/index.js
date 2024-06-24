@@ -82,7 +82,7 @@ export const getrangeddayscal = async (startdate, enddate) => {
     }
 }
 
-export const addnuitri = async (fat, saturated_fat, trans_fat, monounsaturated_fat, polyunsaturated_fat, protein, calories, carbohydrate, cholesterol, sodium, potassium, fiber, sugar, vitamin_a, vitamin_c, calcium, iron, food) => {
+export const addnuitri = async (fat = 0, saturated_fat = 0, trans_fat = 0, monounsaturated_fat = 0, polyunsaturated_fat = 0, protein = 0, calories = 0, carbohydrate = 0, cholesterol = 0, sodium = 0, potassium = 0, fiber = 0, sugar = 0, vitamin_a = 0, vitamin_c = 0, calcium = 0, iron = 0, food) => {
     try {
         return apiRequest.post('/addnuitri', {
             fat,

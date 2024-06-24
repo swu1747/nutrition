@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import { fetchNutri, getFood, getFoodName, getServing } from "../feature/foodDetailSlice";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import CalFact from "../components/calFact.jsx";
+import FoodModal from "../components/FoodModal.jsx";
 
 const FoodDetail = () => {
-
     const param = useParams()
     const food_id = param.food_id
     const dispath = useDispatch()
@@ -28,6 +28,7 @@ const FoodDetail = () => {
             </Select>
         </FormControl>
         <CalFact cur={serving} />
+        <FoodModal />
     </>
 }
 
