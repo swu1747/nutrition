@@ -52,7 +52,7 @@ app.post('/addnuitri', async (req, res) => {
 app.get('/getsdnuitri', async (req, res) => {
     try {
         const { date } = req.query
-        const response = findNutriSingleDay(req.uid, date)
+        const response = await findNutriSingleDay(req.uid, date)
         res.send(response)
     } catch (error) {
         console.log(error)
@@ -61,7 +61,7 @@ app.get('/getsdnuitri', async (req, res) => {
 app.get('/getrangedaynuitri', async (req, res) => {
     try {
         const { startdate, enddate } = req.query
-        const response = findNutriRangedDay(req.uid, startdate, enddate)
+        const response = await findNutriRangedDay(req.uid, startdate, enddate)
         res.send(response)
     } catch (error) {
         console.log(error)

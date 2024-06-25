@@ -102,6 +102,7 @@ const addNuitri = async (userid, fat, saturated_fat, trans_fat, monounsaturated_
 }
 
 const findNutriSingleDay = async (userid, date) => {
+    console.log(userid, date)
     try {
         const query = `SELECT * FROM nuitridetail WHERE time::date = $1 AND userid = $2`
         const values = [date, userid]

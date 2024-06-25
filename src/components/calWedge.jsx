@@ -22,7 +22,7 @@ const CalWedge = () => {
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <CardContent>
                 <Typography component='div' variant="h4">TODAY</Typography>
-                <Typography variant="h5" color="text.secondary" component="div" marginTop={10}>
+                <Typography variant="h6" color="text.secondary" component="div" marginTop={10}>
                     Calorie Burn:{cal}/2000
                 </Typography>
             </CardContent>
