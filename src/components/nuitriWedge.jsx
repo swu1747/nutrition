@@ -50,7 +50,7 @@ const NuitriWedge = () => {
                 },
             })} />
             <Typography variant="h6" color="text.secondary" component="div" >
-                Calories intake : {calorie}/2000
+                Calories intake : {calorie}/2000 Cal
             </Typography>
         </Box>
 

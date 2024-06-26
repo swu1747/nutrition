@@ -23,7 +23,7 @@ const CalWedge = () => {
             <CardContent>
                 <Typography component='div' variant="h4">TODAY</Typography>
                 <Typography variant="h6" color="text.secondary" component="div" marginTop={10}>
-                    Calorie Burn:{cal}/2000
+                    Calorie Burn:{cal}/2000 Cal
                 </Typography>
             </CardContent>
         </Box>
