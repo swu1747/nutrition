@@ -1,9 +1,9 @@
 import { Card, CardContent, Box, Typography } from "@mui/material";
-import { Gauge, gaugeClasses } from "@mui/x-charts";
 import React, { useEffect, useState } from "react";
 import { getsdnuitri } from "../clientapi";
 import dayjs from "dayjs";
 import Sliders from "./Sliders.jsx";
+import MyGauge from "./mygauge.jsx";
 
 
 const NuitriWedge = () => {
@@ -27,7 +27,7 @@ const NuitriWedge = () => {
             setcarb(carbohydrate)
         })
     }, [])
-    return (<Card sx={{ display: "flex", width: 450,justifyContent:'space-between' }}>
+    return (<Card sx={{ display: "flex", width: 450, justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', width: 300 }}>
             <CardContent>
                 <Typography component='div' variant="h4">TODAY Nuitruition</Typography>
@@ -37,18 +37,8 @@ const NuitriWedge = () => {
             </CardContent>
 
         </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'column'}}>
-            < Gauge width={200} height={200} value={calorie / 2000 * 100} text='' cornerRadius="50%" innerRadius={55} sx={(theme) => ({
-                [`& .${gaugeClasses.valueText}`]: {
-                    fontSize: 40,
-                },
-                [`& .${gaugeClasses.valueArc}`]: {
-                    fill: '#50C878',
-                },
-                [`& .${gaugeClasses.referenceArc}`]: {
-                    fill: theme.palette.text.disabled,
-                },
-            })} />
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <MyGauge val={calorie} color='#50C878' />
             <Typography variant="h6" color="text.secondary" component="div" >
                 Calories intake : {calorie}/2000 Cal
             </Typography>

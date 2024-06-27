@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, Typography, Box } from "@mui/material";
-import { Gauge, gaugeClasses } from "@mui/x-charts";
 import dayjs from "dayjs";
 import { getsingledaycal } from "../clientapi";
-
+import MyGauge from "./mygauge.jsx";
 const CalWedge = () => {
     const [cal, setcal] = useState(0)
     useEffect(() => {
@@ -27,17 +26,8 @@ const CalWedge = () => {
                 </Typography>
             </CardContent>
         </Box>
-        <Gauge width={200} height={200} value={cal / 2000 * 100} text='' cornerRadius="50%" innerRadius={55} sx={(theme) => ({
-            [`& .${gaugeClasses.valueText}`]: {
-                fontSize: 40,
-            },
-            [`& .${gaugeClasses.valueArc}`]: {
-                fill: '#DE3163	',
-            },
-            [`& .${gaugeClasses.referenceArc}`]: {
-                fill: theme.palette.text.disabled,
-            },
-        })} />
+        <MyGauge val={cal} color='#DE3163'/>
+
     </Card>)
 }
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { getrangedaynuitri, getrangeddayscal } from "../clientapi";
 import { Card, CardContent, Typography } from "@mui/material";
-import { Gauge, gaugeClasses } from "@mui/x-charts";
+import MyGauge from "./mygauge.jsx";
 
 const Last7Days = () => {
     const [caltake, changecaltake] = useState(0)
@@ -38,17 +38,8 @@ const Last7Days = () => {
             <Typography>
                 Ave Cal Burn last 7 days
             </Typography>
-            <Gauge width={200} height={200} value={calburn / 2000 * 100} text='' cornerRadius="50%" innerRadius={55} sx={(theme) => ({
-                [`& .${gaugeClasses.valueText}`]: {
-                    fontSize: 40,
-                },
-                [`& .${gaugeClasses.valueArc}`]: {
-                    fill: '#DE3163	',
-                },
-                [`& .${gaugeClasses.referenceArc}`]: {
-                    fill: theme.palette.text.disabled,
-                },
-            })} />
+            <MyGauge val={calburn} color='#DE3163' />
+
             <Typography>
                 {calburn}/2000 Cal
             </Typography>
@@ -57,17 +48,8 @@ const Last7Days = () => {
             <Typography>
                 Ave Cal take-in last 7 days
             </Typography>
-            <Gauge width={200} height={200} value={caltake / 2000 * 100} text='' cornerRadius="50%" innerRadius={55} sx={(theme) => ({
-                [`& .${gaugeClasses.valueText}`]: {
-                    fontSize: 40,
-                },
-                [`& .${gaugeClasses.valueArc}`]: {
-                    fill: '#50C878	',
-                },
-                [`& .${gaugeClasses.referenceArc}`]: {
-                    fill: theme.palette.text.disabled,
-                },
-            })} />
+            <MyGauge val={caltake} color={'#50C878'} />
+
             <Typography>
                 {caltake}/2000 Cal
             </Typography>

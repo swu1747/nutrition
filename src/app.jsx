@@ -15,6 +15,7 @@ import EatFood from "./pages/Eatfood.jsx";
 import CalBurn from "./pages/CalBurn.jsx";
 import RecordPage from "./pages/recordPage.jsx";
 import FoodDetail from "./pages/foodDetail.jsx";
+import EverdayCal from "./pages/EverydayCal.jsx";
 export const App = () => {
     return (<>
         <Router>
@@ -28,6 +29,7 @@ export const App = () => {
                     <Route path="/eatfood" element={<EatFood />} />
                     <Route path="/calburn" element={<CalBurn />} />
                     <Route path="/eatfood/:food_id" element={<FoodDetail />} />
+                    <Route path="/daycal/:date" element={<EverdayCal />} />
                 </Route>
                 <Route path="signin" element={<SignIn />} />
                 <Route path="signup" element={<SignUp />} />
