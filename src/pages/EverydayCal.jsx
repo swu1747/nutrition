@@ -7,6 +7,7 @@ import { getsingledaycaldetail, getsingledaycal } from "../clientapi";
 import CalDChart from "../components/caldetailchat.jsx";
 import MyGauge from '../components/mygauge.jsx'
 import CalDtable from "../components/calDtable.jsx";
+import MyCalendar from "../components/Mycalendar.jsx";
 const EverdayCal = () => {
     const param = useParams()
     const [caldetail, changecaldetail] = useState(new Array(24).fill(0))
@@ -44,6 +45,7 @@ const EverdayCal = () => {
         })
     }, [])
     return <Stack spacing={2} sx={{ justifyContent: "flex-end" }} >
+        <MyCalendar />
         <Container maxWidth="false">
             <MyGauge val={totalCal} color='#DE3163' width={350} height={350} rad={100} />
         </Container>

@@ -12,15 +12,15 @@ const Sliders = ({ item, value, total, free, height = 8, unit = 'g' }) => {
             color = '#F59794'
     } else {
         if (value / total <= 0.2) {
-            color = '#DAF7A6'
+            color = '#b2dfdb'
         } else if (value / total > 0.2 && value / total <= 0.4) {
-            color = '#FFC300'
+            color = '#80cbc4'
         } else if (value / total > 0.4 && value / total <= 0.6) {
-            color = '#FF5733'
+            color = '#4db6ac'
         } else if (value / total > 0.6 && value / total <= 0.8) {
-            color = '#C70039'
+            color = '#26a69a'
         } else {
-            color = '#900C3F'
+            color = '#009688'
         }
     }
 

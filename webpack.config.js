@@ -41,6 +41,11 @@ const config = {
                 }
             },
             {
+                test: /\.m?js$/,
+                enforce: 'pre',
+                use: ['source-map-loader'],
+            },
+            {
                 test: /\.css$/i,
                 use: [stylesHandler, 'css-loader'],
             },

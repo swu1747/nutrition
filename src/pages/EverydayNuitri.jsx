@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import MyGauge from "../components/mygauge.jsx";
 import { getdaynutri, getdaynutrilog } from "../feature/everydaynutri.js";
 import Sliders from "../components/Sliders.jsx";
+import MyCalendar from "../components/Mycalendar.jsx";
 const limit = {
     fat: 60,
     saturated_fat: 22,
@@ -38,8 +39,8 @@ const unit = {
 const EverydayNutri = () => {
     const daynutri = useSelector(getdaynutri)
     const log = useSelector(getdaynutrilog)
-    console.log(log, daynutri)
     return (<Stack>
+        <MyCalendar />
         <MyGauge val={daynutri.calories} width={350} height={350} color='#50C878' rad={100} />
         <Typography variant="h5">
             Calories Intate:

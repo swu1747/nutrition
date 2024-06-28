@@ -26,7 +26,7 @@ const CalWedge = () => {
                 </Typography>
             </CardContent>
         </Box>
-        <MyGauge val={cal} color='#DE3163'/>
+        <MyGauge val={cal} color='#DE3163' />
 
     </Card>)
 }
