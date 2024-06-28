@@ -12,15 +12,12 @@ import dayjs from "dayjs";
 const Main = () => {
     const today = dayjs().format('MM-DD-YYYY')
     const photo = useSelector(checkUserphoto)
-    useEffect(() => {
-
-    })
     return (<div>
         <Avatar src={photo}></Avatar>
         <Logout /><br />
         <Stack spacing={2}>
             <Link component={RouterLink} underline="none" to={`/daycal/${today}`} ><CalWedge /></Link>
-            <NuitriWedge />
+            <Link component={RouterLink} underline="none" to={`/daynutri/${today}`} ><NuitriWedge /></Link>
             <Last7Days />
         </Stack >
         <Link variant="contained" component={RouterLink} to='/fitness' >

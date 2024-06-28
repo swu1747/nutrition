@@ -6,10 +6,12 @@ import { useParams } from "react-router-dom";
 import { getsingledaycaldetail, getsingledaycal } from "../clientapi";
 import CalDChart from "../components/caldetailchat.jsx";
 import MyGauge from '../components/mygauge.jsx'
+import CalDtable from "../components/calDtable.jsx";
 const EverdayCal = () => {
     const param = useParams()
     const [caldetail, changecaldetail] = useState(new Array(24).fill(0))
     const [totalCal, changetotalCal] = useState(0)
+    const [detail, setdetail] = useState([])
 
     useEffect(() => {
         const date = param.date
@@ -36,19 +38,21 @@ const EverdayCal = () => {
                 }
             })
             const calories = +res[1].data[0].cal_toal
+            setdetail(res[0].data)
             changetotalCal(calories)
             changecaldetail(cal)
         })
     }, [])
     return <Stack spacing={2} sx={{ justifyContent: "flex-end" }} >
         <Container maxWidth="false">
-            <MyGauge val={totalCal} color='#DE3163' width={300} height={300} rad={80} />
+            <MyGauge val={totalCal} color='#DE3163' width={350} height={350} rad={100} />
         </Container>
         <Box display='flex' flexDirection='column'>
             <Typography variant="h5">Cal Burn</Typography>
             <Typography color='#DE3163'>{totalCal}/2000 CAL</Typography>
         </Box>
         <CalDChart cal={caldetail} />
+        <CalDtable detail={detail} />
     </Stack>
 }
 

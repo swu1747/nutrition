@@ -8,6 +8,7 @@ import settimerReducers from './feature/timeSetterSlice'
 import { setStart, setEnd } from "./feature/timeSetterSlice";
 import nuitriSliceReducers from "./feature/nuitriSlice";
 import FoodDetailReducers from './feature/foodDetailSlice'
+import daynutriReducers from './feature/everydaynutri'
 export default configureStore({
     reducer: {
         user: UserInfoReducers,
@@ -17,7 +18,8 @@ export default configureStore({
         calBurn: calburnsliceReducers,
         settime: settimerReducers,
         nuitritionSearch: nuitriSliceReducers,
-        foodDetail: FoodDetailReducers
+        foodDetail: FoodDetailReducers,
+        daynutri: daynutriReducers
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
