@@ -21,13 +21,13 @@ const Last7Days = () => {
                 }
                 totalcaltakin += +cal.calories
             })
-            const days = daycaltakein.size
+
             res[1].data.forEach((burn) => {
                 totalcalburn += +burn.cal_toal
             })
-            const daysBurn = res[1].data.length
-            const avecal = Math.floor(totalcaltakin / days)
-            const avecalburn = Math.floor(totalcalburn / daysBurn)
+
+            const avecal = Math.floor(totalcaltakin / 7)
+            const avecalburn = Math.floor(totalcalburn / 7)
             changecalbun(avecalburn)
             changecaltake(avecal)
         })
@@ -36,7 +36,7 @@ const Last7Days = () => {
     return (<Card sx={{ width: 450, display: 'flex', justifyContent: 'space-between' }}>
         <CardContent>
             <Typography>
-                Ave Cal Burn last 7 days
+                Average Cal Burn last 7 days
             </Typography>
             <MyGauge val={calburn} color='#DE3163' />
 
@@ -46,7 +46,7 @@ const Last7Days = () => {
         </CardContent>
         <CardContent>
             <Typography>
-                Ave Cal take-in last 7 days
+                Average Cal take-in last 7 days
             </Typography>
             <MyGauge val={caltake} color={'#50C878'} />
 
