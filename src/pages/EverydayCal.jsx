@@ -8,41 +8,18 @@ import CalDChart from "../components/caldetailchat.jsx";
 import MyGauge from '../components/mygauge.jsx'
 import CalDtable from "../components/calDtable.jsx";
 import MyCalendar from "../components/Mycalendar.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchcaldetail, getcaldetail, getdetail, gettotalcal } from "../feature/MonthlyCalBurnSlice";
 const EverdayCal = () => {
     const param = useParams()
-    const [caldetail, changecaldetail] = useState(new Array(24).fill(0))
-    const [totalCal, changetotalCal] = useState(0)
-    const [detail, setdetail] = useState([])
+    const caldetail = useSelector(getcaldetail)
+    const totalCal = useSelector(gettotalcal)
+    const detail = useSelector(getdetail)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const date = param.date
-        const cal = new Array(24).fill(0)
-        Promise.all([getsingledaycaldetail(date), getsingledaycal(date)]).then((res) => {
-            res[0].data.forEach((item) => {
-                const calpermin = +item.calpermin
-                const start = dayjs(item.starttime)
-                const end = dayjs(item.endtime)
-                let startH = start.hour()
-                let endH = end.hour()
-                let startM = start.minute()
-                let endM = end.minute()
-                if (startH === endH) {
-                    cal[startH] += (endM - startM) * calpermin
-                } else {
-                    cal[startH] += (60 - startM) * calpermin
-                    startH++
-                    cal[endH] += endM * calpermin
-                    while (startH < endH) {
-                        cal[startH] += 60 * calpermin
-                        startH++
-                    }
-                }
-            })
-            const calories = res[1].data[0] ? +res[1].data[0].cal_toal : 0
-            setdetail(res[0].data)
-            changetotalCal(calories)
-            changecaldetail(cal)
-        })
+        dispatch(fetchcaldetail(date))
     }, [])
     return <Stack spacing={2} sx={{ justifyContent: "flex-end" }} >
         <MyCalendar />

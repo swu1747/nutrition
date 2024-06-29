@@ -8,9 +8,8 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
 import MyGauge from "./mygauge.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMonthlycal } from "../feature/MonthlyCalBurnSlice.js";
+import { fetchcaldetail, fetchMonthlycal } from "../feature/MonthlyCalBurnSlice.js";
 import { getdaycal } from "../feature/MonthlyCalBurnSlice.js";
-const initial = dayjs()
 const MyCalendar = () => {
     const dispath = useDispatch()
     const EachDayCal = useSelector(getdaycal)
@@ -21,12 +20,13 @@ const MyCalendar = () => {
         dispath(fetchMonthlycal({ start, end }))
     }, [])
     return (<LocalizationProvider dateAdapter={AdapterDayjs}>
-
         <DateCalendar
             // defaultValue={initial}
             disableHighlightToday={true}
             disableFuture={true}
-            onChange={() => {
+            onChange={(date) => {
+                const currentdate = date.format('MM-DD-YYYY')
+                dispath(fetchcaldetail(currentdate))
             }}
             onMonthChange={(date) => {
                 const start = date.startOf('month').format('MM-DD-YYYY')
