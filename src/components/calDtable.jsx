@@ -8,7 +8,7 @@ const CalDtable = ({ detail }) => {
         const start = dayjs(item.starttime)
         const end = dayjs(item.endtime)
         const cal = end.diff(start, 'minute') * (+item.calpermin)
-        return { exercise, starttime: start.format('HH:MM'), endtime: end.format('HH:MM'), cal }
+        return { exercise, starttime: start.format('HH:mm'), endtime: end.format('HH:mm'), cal }
     })
     return <TableContainer component={Paper} sx={{ width: 470 }}>
         <Table sx={{ maxWidth: '100%' }} >

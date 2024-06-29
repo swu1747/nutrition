@@ -38,7 +38,7 @@ const EverdayCal = () => {
                     }
                 }
             })
-            const calories = +res[1].data[0].cal_toal
+            const calories = res[1].data[0] ? +res[1].data[0].cal_toal : 0
             setdetail(res[0].data)
             changetotalCal(calories)
             changecaldetail(cal)

@@ -29,12 +29,12 @@ const everydaynutri = createSlice({
     reducers: {
 
     },
-    extraReducers: (builder) => [
+    extraReducers: (builder) => {
         builder.addCase(fetchdaynutri.fulfilled, (state, action) => {
             state.daynutri = action.payload[0]
             state.log = action.payload[1]
         })
-    ]
+    }
 })
 export const fetchdaynutri = createAsyncThunk('/fetchdaynutri', async (date) => {
     const temp = {
