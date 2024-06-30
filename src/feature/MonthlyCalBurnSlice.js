@@ -63,6 +63,5 @@ export const fetchcaldetail = createAsyncThunk('./fetchcaldetail', async (date) 
 export const gettotalcal = (state) => state.MonthlyCalBurn.totalcal
 export const getcaldetail = (state) => state.MonthlyCalBurn.caldetail
 export const getdetail = (state) => state.MonthlyCalBurn.detail
-
 export const getdaycal = (state) => state.MonthlyCalBurn.everydayCal
 export default MonthlyCalburn.reducer

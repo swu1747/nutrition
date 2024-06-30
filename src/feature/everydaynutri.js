@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getsdnuitri } from "../clientapi";
+import dayjs from "dayjs";
+import { getsdnuitri, getrangedaynuitri } from "../clientapi";
 const initialState = {
     daynutri: {
         fat: 0,
@@ -20,7 +21,8 @@ const initialState = {
         calcium: 0,
         iron: 0
     },
-    log: []
+    log: [],
+    monthlydayCal: {}
 }
 
 const everydaynutri = createSlice({
@@ -33,8 +35,23 @@ const everydaynutri = createSlice({
         builder.addCase(fetchdaynutri.fulfilled, (state, action) => {
             state.daynutri = action.payload[0]
             state.log = action.payload[1]
+        }).addCase(fetchRangeDnutri.fulfilled, (state, action) => {
+            state.monthlydayCal = action.payload
         })
     }
+})
+export const fetchRangeDnutri = createAsyncThunk('/fetchRangeDnutri', async ({ start, end }) => {
+    const temp = {}
+    const res = await getrangedaynuitri(start, end)
+    res.data.forEach((item) => {
+        const date = dayjs(item.time).format('MM-DD-YYYY')
+        if (!temp[date]) {
+            temp[date] = +item.calories
+        } else {
+            temp[date] += +item.calories
+        }
+    })
+    return temp
 })
 export const fetchdaynutri = createAsyncThunk('/fetchdaynutri', async (date) => {
     const temp = {
@@ -72,3 +89,4 @@ export const fetchdaynutri = createAsyncThunk('/fetchdaynutri', async (date) => 
 export default everydaynutri.reducer
 export const getdaynutri = (state) => state.daynutri.daynutri
 export const getdaynutrilog = (state) => state.daynutri.log
+export const getmonthlynutri=(state)=>state.daynutri.monthlydayCal

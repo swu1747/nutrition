@@ -5,19 +5,16 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
 import MyGauge from "./mygauge.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchcaldetail, fetchMonthlycal } from "../feature/MonthlyCalBurnSlice.js";
-import { getdaycal } from "../feature/MonthlyCalBurnSlice.js";
-const MyCalendar = ({ drawerHandler,currentdateHandler }) => {
+import { useDispatch } from "react-redux";
+
+const MyCalendar = ({ drawerHandler, currentdateHandler, monthlyhander, dayhander, cal, color = '#DE3163' }) => {
     const dispath = useDispatch()
-    const EachDayCal = useSelector(getdaycal)
     useEffect(() => {
         const current = dayjs()
         const start = current.startOf('month').format('MM-DD-YYYY')
         const end = current.endOf('month').format('MM-DD-YYYY')
-        dispath(fetchMonthlycal({ start, end }))
+        dispath(monthlyhander({ start, end }))
     }, [])
     return (<LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateCalendar
@@ -26,16 +23,16 @@ const MyCalendar = ({ drawerHandler,currentdateHandler }) => {
             disableFuture={true}
             onChange={(date) => {
                 const currentdate = date.format('MM-DD-YYYY')
-                dispath(fetchcaldetail(currentdate))
+                dispath(dayhander(currentdate))
                 drawerHandler()
                 currentdateHandler(currentdate)
             }}
             onMonthChange={(date) => {
                 const start = date.startOf('month').format('MM-DD-YYYY')
                 const end = date.endOf('month').format('MM-DD-YYYY')
-                dispath(fetchMonthlycal({ start, end }))
+                dispath(monthlyhander({ start, end }))
             }}
-            renderLoading={() => <DayCalendarSkeleton sx={{ width: 400 }} />}
+            // renderLoading={() => <DayCalendarSkeleton sx={{ width: 400 }} />}
             slots={{
                 day: ({ day, outsideCurrentMonth, ...others }) => {
                     const date = day.format('MM-DD-YYYY')
@@ -45,10 +42,9 @@ const MyCalendar = ({ drawerHandler,currentdateHandler }) => {
                             vertical: 'bottom',
                             horizontal: 'right',
                         }}
-                        badgeContent={!outsideCurrentMonth ? <MyGauge val={EachDayCal[date] ? +EachDayCal[date] : 0} width={30} height={30} rad={8} color='#DE3163' /> : null}
+                        badgeContent={!outsideCurrentMonth ? <MyGauge val={cal[date] ? +cal[date] : 0} width={30} height={30} rad={8} color={color} /> : null}
                     >
                         <PickersDay
-                            // isFirstVisibleCell={false}
                             outsideCurrentMonth={outsideCurrentMonth}
                             day={day} {...others} />
                     </Badge>)

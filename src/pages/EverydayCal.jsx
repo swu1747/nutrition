@@ -11,11 +11,16 @@ import { fetchcaldetail, getcaldetail, getdetail, gettotalcal } from "../feature
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ArrowBackIosNewTwoToneIcon from '@mui/icons-material/ArrowBackIosNewTwoTone';
 import dayjs from "dayjs";
+import { fetchMonthlycal } from "../feature/MonthlyCalBurnSlice.js";
+import { getdaycal } from "../feature/MonthlyCalBurnSlice.js";
+
+
 const EverdayCal = () => {
     const param = useParams()
     const caldetail = useSelector(getcaldetail)
     const totalCal = useSelector(gettotalcal)
     const detail = useSelector(getdetail)
+    const EachDayCal = useSelector(getdaycal)
     const [currentdate, setcurrentdate] = useState(dayjs().format('MM-DD-YYYY'))
     const dispatch = useDispatch()
     const [drawer, setdrawer] = useState(false)
@@ -52,7 +57,7 @@ const EverdayCal = () => {
         <CalDChart cal={caldetail} />
         <CalDtable detail={detail} />
         <Drawer anchor="bottom" open={drawer}>
-            <MyCalendar drawerHandler={drawerHandler}currentdateHandler={currentdateHandler}/>
+            <MyCalendar drawerHandler={drawerHandler} currentdateHandler={currentdateHandler} monthlyhander={fetchMonthlycal} dayhander={fetchcaldetail} cal={EachDayCal} />
         </Drawer>
     </Stack>
 }

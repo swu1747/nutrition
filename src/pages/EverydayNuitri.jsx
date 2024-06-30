@@ -3,9 +3,16 @@ import { Stack } from "@mui/system";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import MyGauge from "../components/mygauge.jsx";
-import { getdaynutri, getdaynutrilog } from "../feature/everydaynutri.js";
+import { getdaynutri, getdaynutrilog, getmonthlynutri } from "../feature/everydaynutri.js";
 import Sliders from "../components/Sliders.jsx";
 import MyCalendar from "../components/Mycalendar.jsx";
+import { Drawer, AppBar, IconButton, Toolbar } from "@mui/material";
+import dayjs from "dayjs";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import ArrowBackIosNewTwoToneIcon from '@mui/icons-material/ArrowBackIosNewTwoTone';
+import { useState } from "react";
+import { fetchRangeDnutri, fetchdaynutri } from "../feature/everydaynutri.js";
+
 const limit = {
     fat: 60,
     saturated_fat: 22,
@@ -39,8 +46,28 @@ const unit = {
 const EverydayNutri = () => {
     const daynutri = useSelector(getdaynutri)
     const log = useSelector(getdaynutrilog)
+    const [drawer, setdrawer] = useState(false)
+    const [currentdate, setcurrentdate] = useState(dayjs().format('MM-DD-YYYY'))
+    const monthlydaynutri = useSelector(getmonthlynutri)
+    const drawerHandler = () => {
+        const temp = drawer
+        setdrawer(!temp)
+    }
+    const currentdateHandler = (date) => {
+        setcurrentdate(date)
+    }
     return (<Stack>
-        <MyCalendar />
+        <AppBar position="static">
+            <Toolbar sx={{ display: "flex" }}>
+                <IconButton color="inherit" >
+                    <ArrowBackIosNewTwoToneIcon />
+                </IconButton>
+                <Typography variant="h5" align='center' sx={{ flexGrow: 3 }}> Current Date: {currentdate} </Typography>
+                <IconButton color="inherit" onClick={drawerHandler}>
+                    <CalendarMonthIcon />
+                </IconButton>
+            </Toolbar>
+        </AppBar>
         <MyGauge val={daynutri.calories} width={350} height={350} color='#50C878' rad={100} />
         <Typography variant="h5">
             Calories Intate:
@@ -57,6 +84,9 @@ const EverydayNutri = () => {
                 }
             })}
         </Stack>
+        <Drawer anchor="bottom" open={drawer}>
+            <MyCalendar drawerHandler={drawerHandler} currentdateHandler={currentdateHandler} monthlyhander={fetchRangeDnutri} dayhander={fetchdaynutri} cal={monthlydaynutri} color='#50C878' />
+        </Drawer>
     </Stack>)
 }
 
