@@ -10,7 +10,7 @@ import MyGauge from "./mygauge.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchcaldetail, fetchMonthlycal } from "../feature/MonthlyCalBurnSlice.js";
 import { getdaycal } from "../feature/MonthlyCalBurnSlice.js";
-const MyCalendar = () => {
+const MyCalendar = ({ drawerHandler,currentdateHandler }) => {
     const dispath = useDispatch()
     const EachDayCal = useSelector(getdaycal)
     useEffect(() => {
@@ -27,6 +27,8 @@ const MyCalendar = () => {
             onChange={(date) => {
                 const currentdate = date.format('MM-DD-YYYY')
                 dispath(fetchcaldetail(currentdate))
+                drawerHandler()
+                currentdateHandler(currentdate)
             }}
             onMonthChange={(date) => {
                 const start = date.startOf('month').format('MM-DD-YYYY')
