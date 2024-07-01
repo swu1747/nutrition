@@ -1,7 +1,7 @@
 import { Typography, Box, Container, AppBar, Toolbar, IconButton, Drawer } from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CalDChart from "../components/caldetailchat.jsx";
 import MyGauge from '../components/mygauge.jsx'
 import CalDtable from "../components/calDtable.jsx";
@@ -13,9 +13,11 @@ import ArrowBackIosNewTwoToneIcon from '@mui/icons-material/ArrowBackIosNewTwoTo
 import dayjs from "dayjs";
 import { fetchMonthlycal } from "../feature/MonthlyCalBurnSlice.js";
 import { getdaycal } from "../feature/MonthlyCalBurnSlice.js";
+import Navi from "../components/Navi.jsx";
 
 
 const EverdayCal = () => {
+    const Nav=useNavigate()
     const param = useParams()
     const caldetail = useSelector(getcaldetail)
     const totalCal = useSelector(gettotalcal)
@@ -38,7 +40,9 @@ const EverdayCal = () => {
     return <Stack spacing={2} sx={{ justifyContent: "flex-end" }} >
         <AppBar position="static">
             <Toolbar sx={{ display: "flex" }}>
-                <IconButton color="inherit" >
+                <IconButton color="inherit" onClick={()=>{
+                    Nav('/')
+                }}>
                     <ArrowBackIosNewTwoToneIcon />
                 </IconButton>
                 <Typography variant="h5" align='center' sx={{ flexGrow: 3 }}> Current Date: {currentdate} </Typography>
@@ -59,6 +63,7 @@ const EverdayCal = () => {
         <Drawer anchor="bottom" open={drawer}>
             <MyCalendar drawerHandler={drawerHandler} currentdateHandler={currentdateHandler} monthlyhander={fetchMonthlycal} dayhander={fetchcaldetail} cal={EachDayCal} />
         </Drawer>
+        <Navi n={0}/>
     </Stack>
 }
 

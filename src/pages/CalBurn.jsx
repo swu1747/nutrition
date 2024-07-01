@@ -7,6 +7,7 @@ import { List, ListItem } from "@mui/material";
 import debounce from "../components/debounce";
 import TimeSetter from "../components/timesetter.jsx";
 import BurnCalModal from "../components/modal.jsx";
+import Navi from "../components/Navi.jsx";
 const CalBurn = () => {
     const dispath = useDispatch()
     const resStatus = useSelector(fetchStatus)
@@ -61,6 +62,7 @@ const CalBurn = () => {
             </ListItem>)}
         </List>}
         <BurnCalModal />
+        <Navi n={1} />
     </>
 }
 export default CalBurn

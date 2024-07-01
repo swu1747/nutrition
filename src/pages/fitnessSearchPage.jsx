@@ -6,6 +6,8 @@ import { fetchDifficulty, fetchExerciseListStauts, fetchtype, setDifficulty, set
 import { fetchExerciseList } from "../feature/muscleExercise";
 import { setPage } from "../feature/muscleExercise"
 import { v4 as uuidv4 } from 'uuid';
+import Navi from "../components/Navi.jsx";
+
 const FitnessSearch = () => {
     const { excersie } = useParams()
     const dispatch = useDispatch()
@@ -78,6 +80,7 @@ const FitnessSearch = () => {
             })}
         </List>
         {status === 'pending' ? <div>loading...</div> : <></>}
+        <Navi n={2}/>
     </>)
 }
 export default FitnessSearch

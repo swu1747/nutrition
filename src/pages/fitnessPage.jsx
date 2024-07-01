@@ -3,6 +3,7 @@ import { muscles } from "../feature/musclePartsSlice";
 import { useSelector } from "react-redux";
 import { Card, CardMedia, ListItem, List, CardContent, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import Navi from "../components/Navi.jsx";
 
 
 const Fitness = () => {
@@ -17,7 +18,8 @@ const Fitness = () => {
                     </Link>
                 </Card></ListItem>
         })}
-    </List></>)
+    </List>
+    <Navi n={2} /></>)
 }
 
 export default Fitness

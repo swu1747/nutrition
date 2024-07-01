@@ -5,6 +5,7 @@ import { fetchNutri, getFood, getFoodName, getServing } from "../feature/foodDet
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import CalFact from "../components/calFact.jsx";
 import FoodModal from "../components/FoodModal.jsx";
+import Navi from "../components/Navi.jsx";
 
 const FoodDetail = () => {
     const param = useParams()
@@ -29,6 +30,7 @@ const FoodDetail = () => {
         </FormControl>
         <CalFact cur={serving} />
         <FoodModal />
+        <Navi n={1} />
     </>
 }
 

@@ -4,6 +4,7 @@ import { nuitrisearch } from "../clientapi";
 import { getStatus, getfood, getsearchRes, setStatus, setFood, fetchNuitriList } from "../feature/nuitriSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Navi from "../components/Navi.jsx";
 
 const EatFood = () => {
     const dispath = useDispatch()
@@ -67,6 +68,7 @@ const EatFood = () => {
                 </Card></Link>
             })}
         </List>}
+        <Navi n={1} />
     </>
 }
 

@@ -12,6 +12,8 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ArrowBackIosNewTwoToneIcon from '@mui/icons-material/ArrowBackIosNewTwoTone';
 import { useState } from "react";
 import { fetchRangeDnutri, fetchdaynutri } from "../feature/everydaynutri.js";
+import Navi from "../components/Navi.jsx";
+import { useNavigate } from "react-router-dom";
 
 const limit = {
     fat: 60,
@@ -44,6 +46,7 @@ const unit = {
     iron: 'mg'
 }
 const EverydayNutri = () => {
+    const Nav = useNavigate()
     const daynutri = useSelector(getdaynutri)
     const log = useSelector(getdaynutrilog)
     const [drawer, setdrawer] = useState(false)
@@ -59,7 +62,9 @@ const EverydayNutri = () => {
     return (<Stack>
         <AppBar position="static">
             <Toolbar sx={{ display: "flex" }}>
-                <IconButton color="inherit" >
+                <IconButton color="inherit" onClick={() => {
+                    Nav('/')
+                }} >
                     <ArrowBackIosNewTwoToneIcon />
                 </IconButton>
                 <Typography variant="h5" align='center' sx={{ flexGrow: 3 }}> Current Date: {currentdate} </Typography>
@@ -87,6 +92,7 @@ const EverydayNutri = () => {
         <Drawer anchor="bottom" open={drawer}>
             <MyCalendar drawerHandler={drawerHandler} currentdateHandler={currentdateHandler} monthlyhander={fetchRangeDnutri} dayhander={fetchdaynutri} cal={monthlydaynutri} color='#50C878' />
         </Drawer>
+        <Navi n={0} />
     </Stack>)
 }
 

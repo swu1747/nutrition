@@ -3,6 +3,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchExercise } from "../feature/muscleExercise";
+import Navi from "../components/Navi.jsx";
+
 
 const ExcerciseDetail = () => {
     const param = useParams()
@@ -10,22 +12,25 @@ const ExcerciseDetail = () => {
     const detail = useSelector((state) => {
         return fetchExercise(state, excersie)
     })
-    return (<Card>
-        <CardContent>
-            <Typography>{detail.name}</Typography>
-        </CardContent>
-        <CardContent>
-            <Typography>{detail.type}</Typography>
-        </CardContent>
-        <CardContent>
-            <Typography>{detail.difficulty}</Typography>
-        </CardContent>
-        <CardContent>
-            <Typography>{detail.equipment}</Typography>
-        </CardContent>
-        <CardContent>
-            <Typography>{detail.instructions}</Typography>
-        </CardContent>
-    </Card>)
+    return (<>
+        <Card>
+            <CardContent>
+                <Typography>{detail.name}</Typography>
+            </CardContent>
+            <CardContent>
+                <Typography>{detail.type}</Typography>
+            </CardContent>
+            <CardContent>
+                <Typography>{detail.difficulty}</Typography>
+            </CardContent>
+            <CardContent>
+                <Typography>{detail.equipment}</Typography>
+            </CardContent>
+            <CardContent>
+                <Typography>{detail.instructions}</Typography>
+            </CardContent>
+        </Card>
+        <Navi n={2}/>
+        </>)
 }
 export default ExcerciseDetail

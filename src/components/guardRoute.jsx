@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { ref, getStorage } from "firebase/storage";
 import { Outlet } from "react-router-dom";
-import axios from "axios";
 const storage = getStorage()
 const PrivateRoute = () => {
     const dispatch = useDispatch()

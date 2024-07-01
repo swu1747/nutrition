@@ -96,8 +96,8 @@ const CalFact = ({ cur }) => {
     return <>
         <PieChart
             series={series}
-            width={600}
-            height={600}
+            width={500}
+            height={500}
             sx={{
                 [`& .${pieArcLabelClasses.root}`]: {
                     fill: 'white',
