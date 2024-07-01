@@ -10,6 +10,7 @@ const Navi = ({ n }) => {
     const navigate = useNavigate()
     return (<Box sx={{ width: '100%', position: 'fixed', bottom: 0 }}>
         <BottomNavigation
+        sx={{justifyContent: 'space-around' }}
             showLabels
             value={n}
         >

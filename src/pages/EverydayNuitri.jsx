@@ -48,7 +48,6 @@ const unit = {
 const EverydayNutri = () => {
     const Nav = useNavigate()
     const daynutri = useSelector(getdaynutri)
-    const log = useSelector(getdaynutrilog)
     const [drawer, setdrawer] = useState(false)
     const [currentdate, setcurrentdate] = useState(dayjs().format('MM-DD-YYYY'))
     const monthlydaynutri = useSelector(getmonthlynutri)
@@ -75,7 +74,7 @@ const EverydayNutri = () => {
         </AppBar>
         <MyGauge val={daynutri.calories} width={350} height={350} color='#50C878' rad={100} />
         <Typography variant="h5">
-            Calories Intate:
+            Calories Intake:
         </Typography>
         <Typography>
             {daynutri.calories}/2000 Cal
