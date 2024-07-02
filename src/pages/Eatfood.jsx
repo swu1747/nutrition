@@ -31,7 +31,6 @@ const EatFood = () => {
         }
     }
     const handler = debounce(inputhandler)
-
     const searchNuitri = () => {
         dispath(fetchNuitriList())
     }

@@ -6,6 +6,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import CalFact from "../components/calFact.jsx";
 import FoodModal from "../components/FoodModal.jsx";
 import Navi from "../components/Navi.jsx";
+import TopNavi from "../components/TopNavi.jsx";
 
 const FoodDetail = () => {
 
@@ -22,7 +23,7 @@ const FoodDetail = () => {
         dispath(fetchNutri(food_id))
     }, [])
     return <>
-        {food_name}<br />
+    <TopNavi display={food_name}/>
         <FormControl fullWidth >
             <InputLabel >serving size</InputLabel>
             <Select value={serving} onChange={servingHandler}>
