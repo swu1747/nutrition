@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Navi from "../components/Navi.jsx";
+import TopNavi from "../components/TopNavi.jsx";
 
 const RecordPage = () => {
     const navigate = useNavigate()
     return <Stack>
+        <TopNavi display={'Record'}/>
         <Card onClick={() => {
             navigate('/calburn')
         }}>

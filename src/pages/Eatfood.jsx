@@ -5,7 +5,8 @@ import { getStatus, getfood, getsearchRes, setStatus, setFood, fetchNuitriList }
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Navi from "../components/Navi.jsx";
-
+import TopNavi from "../components/TopNavi.jsx";
+import debounce from "../components/debounce";
 const EatFood = () => {
     const dispath = useDispatch()
     const [search, setSearch] = useState([])
@@ -29,10 +30,13 @@ const EatFood = () => {
             throw error
         }
     }
+    const handler = debounce(inputhandler)
+
     const searchNuitri = () => {
         dispath(fetchNuitriList())
     }
     return <>
+            <TopNavi display={'Record'}/>
         <Autocomplete
             freeSolo
             disableClearable
@@ -58,7 +62,7 @@ const EatFood = () => {
                     </li>
                 }
             }
-            onInputChange={inputhandler} />
+            onInputChange={handler} />
         <Button onClick={searchNuitri}>search</Button>
         {status === 'idle' ? <div></div> : <List>{
             nuitrilist.map((food) => {

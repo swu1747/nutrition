@@ -8,6 +8,7 @@ import debounce from "../components/debounce";
 import TimeSetter from "../components/timesetter.jsx";
 import BurnCalModal from "../components/modal.jsx";
 import Navi from "../components/Navi.jsx";
+import TopNavi from "../components/TopNavi.jsx";
 const CalBurn = () => {
     const dispath = useDispatch()
     const resStatus = useSelector(fetchStatus)
@@ -33,6 +34,7 @@ const CalBurn = () => {
         dispath(changeExpand(e.target.value))
     }
     return <>
+            <TopNavi display={'Record'}/>
         <Autocomplete
             freeSolo
             options={searchRes.map((item) => item.name)}

@@ -8,6 +8,7 @@ import FoodModal from "../components/FoodModal.jsx";
 import Navi from "../components/Navi.jsx";
 
 const FoodDetail = () => {
+
     const param = useParams()
     const food_id = param.food_id
     const dispath = useDispatch()
