@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchExercise } from "../feature/muscleExercise";
 import Navi from "../components/Navi.jsx";
+import TopNavi from "../components/TopNavi.jsx";
 
 
 const ExcerciseDetail = () => {
@@ -13,6 +14,7 @@ const ExcerciseDetail = () => {
         return fetchExercise(state, excersie)
     })
     return (<>
+        <TopNavi display={'Fitness Center'} />
         <Card>
             <CardContent>
                 <Typography>{detail.name}</Typography>
@@ -30,7 +32,7 @@ const ExcerciseDetail = () => {
                 <Typography>{detail.instructions}</Typography>
             </CardContent>
         </Card>
-        <Navi n={2}/>
-        </>)
+        <Navi n={2} />
+    </>)
 }
 export default ExcerciseDetail

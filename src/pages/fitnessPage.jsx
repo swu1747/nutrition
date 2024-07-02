@@ -1,15 +1,17 @@
 import React from "react";
 import { muscles } from "../feature/musclePartsSlice";
 import { useSelector } from "react-redux";
-import { Card, CardMedia, ListItem, List, CardContent, Typography } from "@mui/material";
+import { Card, CardMedia, ListItem, List, CardContent, Typography, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import Navi from "../components/Navi.jsx";
+import TopNavi from "../components/TopNavi.jsx";
 
 
 const Fitness = () => {
     const muscleList = useSelector(muscles)
 
-    return (<><List>
+    return (<><Stack>
+        <TopNavi display={'Fitness Center'}/>
         {muscleList.map((item) => {
             return <ListItem key={item}>
                 <Card sx={{ maxWidth: 200, maxHeight: 200 }}>
@@ -18,8 +20,8 @@ const Fitness = () => {
                     </Link>
                 </Card></ListItem>
         })}
-    </List>
-    <Navi n={2} /></>)
+    </Stack>
+        <Navi n={2} /></>)
 }
 
 export default Fitness

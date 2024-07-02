@@ -9,15 +9,15 @@ import NuitriWedge from "../components/nuitriWedge.jsx";
 import Last7DaysWidge from "../components/Last7Days.jsx";
 import dayjs from "dayjs";
 import Navi from "../components/Navi.jsx";
+import TopNavi from "../components/TopNavi.jsx";
 
 const Main = () => {
     const today = dayjs().format('MM-DD-YYYY')
-    const photo = useSelector(checkUserphoto)
+    // const photo = useSelector(checkUserphoto)
     return (
         <>
-            <Stack spacing={2} width={500}>
-                <Avatar src={photo}></Avatar>
-                <Logout /><br />
+            <Stack spacing={2} width='450px'>
+                <TopNavi display='Summary' />
                 <Link component={RouterLink} underline="none" to={`/daycal/${today}`} ><CalWedge /></Link>
                 <Link component={RouterLink} underline="none" to={`/daynutri/${today}`} ><NuitriWedge /></Link>
                 <Link component={RouterLink} underline="none" to={`/last7days`} ><Last7DaysWidge /></Link>
