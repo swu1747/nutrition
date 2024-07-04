@@ -47,7 +47,7 @@ const Last7Days = () => {
         })
 
     }, [])
-    return (<Card sx={{ width: 450, display: 'flex', justifyContent: 'space-between' }}>
+    return (<Card sx={{  width: '100%', flexGrow: 2, display: 'flex', justifyContent: 'space-between' }}>
         <CardContent>
             <Typography>
                 Average Cal Burn last 7 days

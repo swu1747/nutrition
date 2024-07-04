@@ -16,7 +16,7 @@ const NuitriWedge = () => {
         const today = dayjs().format('YYYY-MM-DD')
         dispath(fetchdaynutri(today))
     }, [])
-    return (<Card sx={{ display: "flex", width: 450, justifyContent: 'space-between' }}>
+    return (<Card sx={{ display: "flex", width: '100%', justifyContent: 'space-between',  flexGrow: 1 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', width: 300 }}>
             <CardContent>
                 <Typography component='div' variant="h4">TODAY Nuitruition</Typography>

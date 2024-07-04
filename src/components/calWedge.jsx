@@ -17,10 +17,10 @@ const CalWedge = () => {
         }
         getCal()
     }, [])
-    return (<Card sx={{ display: 'flex', width: 450 }}>
+    return (<Card sx={{ display: 'flex', width: '100%', flexGrow: 1 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <CardContent>
-                <Typography component='div' variant="h4">TODAY</Typography>
+            <CardContent >
+                <Typography component='div' variant="h4" >TODAY</Typography>
                 <Typography variant="h6" color="text.secondary" component="div" marginTop={10}>
                     Calorie Burn:{cal}/2000 Cal
                 </Typography>
