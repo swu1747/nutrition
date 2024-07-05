@@ -16,7 +16,7 @@ const Main = () => {
     // const photo = useSelector(checkUserphoto)
     return (
         <>
-            <Stack spacing={2} width='100%'>
+            <Stack >
                 <TopNavi display='Summary' />
                 <Link component={RouterLink} underline="none" to={`/daycal/${today}`} ><CalWedge /></Link>
                 <Link component={RouterLink} underline="none" to={`/daynutri/${today}`} ><NuitriWedge /></Link>

@@ -19,6 +19,7 @@ import EverdayCal from "./pages/EverydayCal.jsx";
 import EverydayNutri from "./pages/EverydayNuitri.jsx";
 import Last7daycal from "./pages/Last7dayCal.jsx";
 import Profile from "./pages/profile.jsx";
+import theme from "./css/style.js";
 export const App = () => {
     return (<>
         <Router>

@@ -6,7 +6,7 @@ import MyGauge from "./mygauge.jsx";
 import { useNavigate } from "react-router-dom";
 
 const Last7Days = () => {
-    const nav=useNavigate()
+    const nav = useNavigate()
     const [caltake, changecaltake] = useState(0)
     const [calburn, changecalbun] = useState(0)
     const [last7daysnutri, setlast7daysnutri] = useState(new Array(7).fill(0))
@@ -47,24 +47,23 @@ const Last7Days = () => {
         })
 
     }, [])
-    return (<Card sx={{  width: '100%', flexGrow: 2, display: 'flex', justifyContent: 'space-between' }}>
+    return (<Card sx={{ width: '100%', flexGrow: 2, display: 'flex', justifyContent: 'space-between' }}>
         <CardContent>
-            <Typography>
-                Average Cal Burn last 7 days
+            <Typography variant="h3" color={'#5a5a5a'}>
+                Avg Cals Burn
             </Typography>
-            <MyGauge val={calburn} color='#DE3163' />
-
-            <Typography>
-                {calburn}/2000 Cal
+            <MyGauge val={calburn} width={400} height={400} rad={100} color='#DE3163' />
+            <Typography variant="h4" color={'#808080'}>
+                {calburn}/2000 Cals in last 7 days
             </Typography>
         </CardContent>
         <CardContent>
-            <Typography>
-                Average Cal take-in last 7 days
+            <Typography variant="h3" color={'#5a5a5a'}>
+                Avg Cals InTake
             </Typography>
-            <MyGauge val={caltake} color={'#50C878'} />
-            <Typography>
-                {caltake}/2000 Cal
+            <MyGauge width={400} height={400} val={caltake} rad={100} color='#50C878' />
+            <Typography variant="h4" color={'#808080'}>
+                {caltake}/2000 Cals in last 7 days
             </Typography>
         </CardContent>
     </Card>)

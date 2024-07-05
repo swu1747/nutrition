@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-const Sliders = ({ item, value, total, free, height = 8, unit = 'g' }) => {
+const Sliders = ({ item, value, total, free, height = 20, unit = 'g' }) => {
 
     let color
     if (!free) {
@@ -33,18 +33,18 @@ const Sliders = ({ item, value, total, free, height = 8, unit = 'g' }) => {
         <Box sx={{
             backgroundColor: '#C0C0C0',
             height: height,
-            borderRadius: 2
+            borderRadius: 5
         }}>
             <Box sx={{
                 backgroundColor: `${color}`,
                 height: height,
                 width: `${width * 100}%`,
-                borderRadius: 2
+                borderRadius: 5
             }}></Box>
         </Box>
         <Box justifyContent="space-between" display='flex'>
-            <Typography>{item}</Typography>
-            <Typography >{`${val}/${total} ${unit}`}</Typography>
+            <Typography variant="h4">{item}</Typography>
+            <Typography variant="h4">{`${val}/${total} ${unit}`}</Typography>
         </Box>
     </Box>
 }

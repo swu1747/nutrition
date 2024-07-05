@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, Typography, Box } from "@mui/material";
+import { Card, CardContent, Typography, Box, Stack } from "@mui/material";
 import dayjs from "dayjs";
 import { getsingledaycal } from "../clientapi";
 import MyGauge from "./mygauge.jsx";
@@ -17,16 +17,22 @@ const CalWedge = () => {
         }
         getCal()
     }, [])
-    return (<Card sx={{ display: 'flex', width: '100%', flexGrow: 1 }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <CardContent >
-                <Typography component='div' variant="h4" >TODAY</Typography>
-                <Typography variant="h6" color="text.secondary" component="div" marginTop={10}>
-                    Calorie Burn:{cal}/2000 Cal
-                </Typography>
+    return (<Card sx={{ display: 'flex', width: '100%', flexGrow: 1, justifyContent: 'space-between' ,height:'100%'}}>
+        <Box >
+            <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }} >
+                <Stack spacing={3}>
+                    <Typography component='div' variant="h2" fontWeight={20} >TODAY</Typography>
+                    <Typography component='div' variant="h3" fontWeight={60} >Calories Burn </Typography>
+                    <Typography variant="h2" color="text.secondary" component="div" >
+                        {cal}/2000 Cals
+                    </Typography>
+                </Stack>
+
             </CardContent>
         </Box>
-        <MyGauge val={cal} color='#DE3163' />
+        <Box>
+            <MyGauge val={cal} color='#DE3163' />
+        </Box>
 
     </Card>)
 }

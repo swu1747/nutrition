@@ -16,21 +16,26 @@ const NuitriWedge = () => {
         const today = dayjs().format('YYYY-MM-DD')
         dispath(fetchdaynutri(today))
     }, [])
-    return (<Card sx={{ display: "flex", width: '100%', justifyContent: 'space-between',  flexGrow: 1 }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', width: 300 }}>
+    return (<Card sx={{ display: "flex", width: '100%', justifyContent: 'space-between', flexGrow: 1 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', width: 500 }}>
             <CardContent>
-                <Typography component='div' variant="h4">TODAY Nuitruition</Typography>
+                <Typography component='div' variant="h2" fontWeight={20}>TODAY</Typography>
+                <Typography component='div' variant="h3" fontWeight={60}>Nutrition</Typography>
                 <Sliders value={x.fat} total={60} item='fat' />
                 <Sliders value={x.protein} total={60} item='protein' />
                 <Sliders value={x.carbohydrate} total={300} item='carbohydrate' />
+                <Typography variant="h4" color="text.secondary" component="div" >
+                    Calories intake:
+                </Typography>
+                <Typography variant="h4" color="text.secondary" component="div" >
+                    {x.calories}/2000 Cals
+                </Typography>
             </CardContent>
 
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <MyGauge val={x.calories} color='#50C878' />
-            <Typography variant="h6" color="text.secondary" component="div" >
-                Calories intake : {x.calories}/2000 Cal
-            </Typography>
+
         </Box>
 
     </Card>)
