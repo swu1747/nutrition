@@ -27,7 +27,6 @@ const CalWedge = () => {
                         {cal}/2000 Cals
                     </Typography>
                 </Stack>
-
             </CardContent>
         </Box>
         <Box>

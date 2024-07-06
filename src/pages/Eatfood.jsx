@@ -35,7 +35,7 @@ const EatFood = () => {
         dispath(fetchNuitriList())
     }
     return <>
-            <TopNavi display={'Record'}/>
+            <TopNavi display={'Record Nutri Intake'}/>
         <Autocomplete
             freeSolo
             disableClearable

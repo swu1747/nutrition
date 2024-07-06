@@ -8,19 +8,19 @@ import TopNavi from "../components/TopNavi.jsx";
 const RecordPage = () => {
     const navigate = useNavigate()
     return <Stack>
-        <TopNavi display={'Record'}/>
-        <Card onClick={() => {
+        <TopNavi display={'Record Center'} />
+        <Card sx={{ height: 400, display: 'flex', justifyContent: 'center', flexDirection: 'column' }} onClick={() => {
             navigate('/calburn')
         }}>
-            <CardContent>
-                <Typography>cal burn</Typography>
+            <CardContent >
+                <Typography variant='h1' textAlign={'center'} color='#DE3163' fontWeight={30}>Calories Burn</Typography>
             </CardContent>
         </Card>
-        <Card onClick={() => {
+        <Card sx={{ height: 400, display: 'flex', justifyContent: 'center', flexDirection: 'column' }} onClick={() => {
             navigate('/eatfood')
         }}>
-            <CardContent>
-                <Typography>eatfood</Typography>
+            <CardContent >
+                <Typography variant='h1' textAlign={'center'} color='#50C878' fontWeight={30}>Calories Intake</Typography>
             </CardContent>
         </Card>
         <Navi n={1} />

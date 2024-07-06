@@ -3,7 +3,9 @@ import { dark } from "@mui/material/styles/createPalette";
 
 const theme = createTheme({
     palette: {
-
+        primary: {
+            main: '#1995AD',
+        }
     },
     components: {
         MuiAppBar: {
@@ -28,15 +30,25 @@ const theme = createTheme({
         MuiCard: {
             styleOverrides: {
                 root: {
-                    borderRadius:'3%'
+                    borderRadius: '20px',
+                    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)'
                 }
             }
         },
-        MuiAvatar:{
-            styleOverrides:{
-                root:{
-                    height:125,
-                    width:125
+        MuiAvatar: {
+            styleOverrides: {
+                root: {
+                    height: 125,
+                    width: 125
+                }
+            }
+        },
+        MuiBottomNavigationAction: {
+            styleOverrides: {
+                root: {
+                    '&.Mui-selected': {
+                        color: '#1995AD',
+                    }
                 }
             }
         }
