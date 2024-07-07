@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Autocomplete, Button, CardContent, TextField, Typography, Card, Stack, Box } from "@mui/material";
 import { nuitrisearch } from "../clientapi";
 import { getStatus, getfood, getsearchRes, setStatus, setFood, fetchNuitriList } from "../feature/nuitriSlice";
@@ -15,7 +15,11 @@ const EatFood = () => {
     const [search, setSearch] = useState([])
     const status = useSelector(getStatus)
     const nuitrilist = useSelector(getsearchRes)
+    useEffect(() => {
+        dispath(setStatus('idle'))
+    },[])
     const inputhandler = async (e) => {
+        dispath(setStatus('idle'))
         try {
             const temp = e.target.innerHTML || e.target.value
             dispath(setFood(temp))
@@ -86,7 +90,7 @@ const EatFood = () => {
             </Box>
 
         </Box>
-        {status === 'idle' ? null : <Stack sx={{ marginLeft:3, height: 1400, overflow: 'auto' }} >{
+        {status === 'idle' ? null : <Stack sx={{ marginLeft: 3, height: 1400, overflow: 'auto' }} >{
             nuitrilist.map((food) => {
                 return <Link component={RouterLink} underline="none" key={food.food_id} to={`/eatfood/${food.food_id}`} ><Card sx={{ width: 900 }}  >
                     <CardContent><Typography variant="h4">{food.food_name}</Typography></CardContent>

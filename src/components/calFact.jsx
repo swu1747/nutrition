@@ -96,8 +96,8 @@ const CalFact = ({ cur }) => {
     return <>
         <PieChart
             series={series}
-            width={500}
-            height={500}
+            width={600}
+            height={600}
             sx={{
                 [`& .${pieArcLabelClasses.root}`]: {
                     fill: 'white',
@@ -109,9 +109,10 @@ const CalFact = ({ cur }) => {
         />
         <Paper elevation={3} sx={{
             padding: '19px',
-            width: 280,
+            width: 560,
             border: '2px solid grey',
             borderRadius: 0,
+            height:1000
         }}>
             <Stack direction='row' justifyContent="space-between">
                 <Typography sx={{ fontSize: 22, fontWeight: 900 }}>
@@ -151,8 +152,8 @@ const CalFact = ({ cur }) => {
                     }}>Amount Per Serving
                     </Typography>
                     <Typography sx={{
-                        height: '28px',
-                        lineHeight: '28px',
+                        height: '40px',
+                        lineHeight: '40px',
                         fontSize: '19px',
                         fontWeight: 900
                     }}>Calories
