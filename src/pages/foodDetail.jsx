@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchNutri, getFood, getFoodName, getServing } from "../feature/foodDetailSlice";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, Stack } from "@mui/material";
 import CalFact from "../components/calFact.jsx";
 import FoodModal from "../components/FoodModal.jsx";
 import Navi from "../components/Navi.jsx";
@@ -23,15 +23,20 @@ const FoodDetail = () => {
         dispath(fetchNutri(food_id))
     }, [])
     return <>
-    <TopNavi display={food_name}/>
-        <FormControl fullWidth >
-            <InputLabel >serving size</InputLabel>
-            <Select value={serving} onChange={servingHandler}>
-                {nutriList.map((item) => <MenuItem value={item.serving_description} key={item.serving_id}>{item.serving_description}</MenuItem>)}
-            </Select>
-        </FormControl>
-        <CalFact cur={serving} />
-        <FoodModal />
+        <TopNavi display={food_name} />
+        <Stack sx={{
+            height: 1500,
+            overflow: 'auto'
+        }}>
+            <FormControl>
+                <InputLabel >Serving Size</InputLabel>
+                <Select label='Serving Size' value={serving} onChange={servingHandler}>
+                    {nutriList.map((item) => <MenuItem value={item.serving_description} key={item.serving_id}>{item.serving_description}</MenuItem>)}
+                </Select>
+            </FormControl>
+            <CalFact cur={serving} />
+            <FoodModal />
+        </Stack>
         <Navi n={1} />
     </>
 }
