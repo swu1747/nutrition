@@ -2,6 +2,7 @@ import { createTheme } from "@mui/material";
 import { dark } from "@mui/material/styles/createPalette";
 
 const theme = createTheme({
+
     palette: {
         primary: {
             main: '#1995AD',
@@ -17,6 +18,7 @@ const theme = createTheme({
                 }
             }
         },
+
         MuiStack: {
             defaultProps: {
                 spacing: 3

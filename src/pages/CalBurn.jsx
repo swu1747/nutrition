@@ -64,19 +64,21 @@ const CalBurn = () => {
                     label='search'
                     onInputChange={handler}
                 />
-                <Button  variant="contained" onClick={searchres}><SearchIcon sx={{width:60}}/></Button>
+                <Button variant="contained" onClick={searchres}><SearchIcon sx={{ width: 60 }} /></Button>
             </Box>
-            {resStatus === 'idle' ? null : <List>
+            {resStatus === 'idle' ? null : <List sx={{ height: 1400, overflow: 'auto',marginLeft:-2 }}>
                 {res.map((item) => <ListItem key={item.name}>
-                    <Card >
+                    <Card sx={{
+                        width: 900
+                    }} >
                         <CardContent>
-                            <Typography>{item.name}</Typography>
+                            <Typography variant="h3" color={'#6F6F6F'}>{item.name}</Typography>
                         </CardContent>
                         <CardContent>
-                            <Typography>{item.calories_per_hour}</Typography>
+                            <Typography variant="h4" color={'#6F6F6F'}>Cal: {item.calories_per_hour} Cal/h</Typography>
                         </CardContent>
                         <CardActions>
-                            <Button value={item.name} onClick={expandHandler}>select</Button>
+                            <Button variant="contained" value={item.name} onClick={expandHandler} sx={{ fontSize: 30, width: '100%' }}>Select</Button>
                         </CardActions>
                         <Collapse in={item.expand} unmountOnExit><TimeSetter exercise={item.name} value={item.calories_per_hour} /></Collapse>
                     </Card>
