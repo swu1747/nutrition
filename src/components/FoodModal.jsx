@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Typography } from "@mui/material";
+import { Modal, Typography,Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { changeFoodModal, getFoodModal } from '../feature/foodDetailSlice'
 
@@ -9,11 +9,10 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 900,
-    height:1600,
+    width: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
-    boxShadow: 24,
+    boxShadow: 0,
     p: 4,
 };
 const FoodModal = () => {
@@ -24,10 +23,14 @@ const FoodModal = () => {
     }
 
     return (
-        <Modal style={style}
+        <Modal
             open={modal}
             onClose={modalChange}>
-            <Typography>success</Typography>
+            <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                    success
+                </Typography>
+            </Box>
         </Modal>
     )
 }

@@ -1,4 +1,4 @@
-import { Modal, Typography } from "@mui/material";
+import { Modal, Typography,Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getModal } from "../feature/calburnslice";
 import { changeModal } from "../feature/calburnslice";
@@ -13,7 +13,7 @@ const BurnCalModal = () => {
         width: 400,
         bgcolor: 'background.paper',
         border: '2px solid #000',
-        boxShadow: 24,
+        boxShadow: 0,
         p: 4,
     };
 
@@ -24,11 +24,14 @@ const BurnCalModal = () => {
     }
 
     return (<Modal
-        style={style}
         open={show}
         onClose={modalcontrol}
     >
-        <Typography>success</Typography>
+        <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+                success
+            </Typography>
+        </Box>
     </Modal>)
 }
 
