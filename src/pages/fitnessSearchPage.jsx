@@ -1,11 +1,12 @@
-import { Card, CardMedia, ListItem, List, CardContent, Typography, AppBar, Select, InputLabel, MenuItem, FormControl, Button } from "@mui/material";
+import { Card, CardMedia, ListItem, List, CardContent, Typography, AppBar, Select, InputLabel, MenuItem, FormControl, Button, Link, Box, Rating } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 import { fetchDifficulty, fetchExerciseListStauts, fetchtype, setDifficulty, setmuscle, setType, updateExerciseList } from "../feature/muscleExercise";
 import { fetchExerciseList } from "../feature/muscleExercise";
 import { setPage } from "../feature/muscleExercise"
 import { v4 as uuidv4 } from 'uuid';
+import { styled } from '@mui/system';
 import Navi from "../components/Navi.jsx";
 import TopNavi from "../components/TopNavi.jsx";
 
@@ -43,7 +44,7 @@ const FitnessSearch = () => {
         <TopNavi display={'Fitness Center'} />
         <AppBar position="static">
             <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel >difficulty</InputLabel>
+                <InputLabel  >difficulty</InputLabel>
                 <Select value={difficulty} onChange={difficultyhandler}>
                     <MenuItem value={''}>all</MenuItem>
                     <MenuItem value={'beginner'}>beginner</MenuItem>
@@ -51,7 +52,7 @@ const FitnessSearch = () => {
                     <MenuItem value={'expert'}>expert</MenuItem>
                 </Select>
             </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <FormControl sx={{ m: 1, minWidth: 120, fontSize: 30 }}>
                 <InputLabel >type</InputLabel>
                 <Select value={type} onChange={typeHandler}>
                     <MenuItem value={''}>all</MenuItem>
@@ -64,17 +65,26 @@ const FitnessSearch = () => {
                     <MenuItem value={'strongman'}>strongman</MenuItem>
                 </Select>
             </FormControl>
-            <Button onClick={searchHandler} color="inherit">search</Button>
+            <Button variant="contained" onClick={searchHandler}>Search</Button>
         </AppBar>
-        <List>
+        <List sx={{ height: 1350, overflow: 'auto' }}>
             {excerList.map((excer) => {
+                let value = 5
+                if (excer.difficulty == 'beginner') {
+                    value = 1
+                } else {
+                    value = 3
+                }
                 return <ListItem key={uuidv4()}>
-                    <Link to={`/fitness/${excersie}/${excer.name}`}>
-                        <Card sx={{ Width: 100, Height: 100 }}>
-                            <CardMedia component='img' image={`/type/${excer.type}.png`} />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">name:{excer.name}</Typography>
-                                <Typography gutterBottom variant="h5" component="div"> difficulty: {excer.difficulty}</Typography>
+                    <Link component={RouterLink} underline='none' to={`/fitness/${excersie}/${excer.name}`}>
+                        <Card sx={{ height: 350, width: 900, display: 'flex' }}>
+                            <CardMedia sx={{ height: 300, width: 300 }} component='img' image={`/type/${excer.type}.png`} />
+                            <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} >
+                                <Typography gutterBottom variant="h3" component="div">{excer.name}</Typography>
+                                <Box>
+                                    <Typography gutterBottom variant="h4" component="div"> difficulty</Typography>
+                                    <Rating readOnly size='large' value={value} />
+                                </Box>
                             </CardContent>
                         </Card>
                     </Link>
