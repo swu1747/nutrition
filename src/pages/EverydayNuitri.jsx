@@ -64,11 +64,11 @@ const EverydayNutri = () => {
                 <IconButton color="inherit" onClick={() => {
                     Nav('/')
                 }} >
-                    <ArrowBackIosNewTwoToneIcon />
+                    <ArrowBackIosNewTwoToneIcon fontSize="large"/>
                 </IconButton>
-                <Typography variant="h5" align='center' sx={{ flexGrow: 3 }}> Current Date: {currentdate} </Typography>
+                <Typography variant="h4" align='center' sx={{ flexGrow: 3 }}> Current Date: {currentdate} </Typography>
                 <IconButton color="inherit" onClick={drawerHandler}>
-                    <CalendarMonthIcon />
+                    <CalendarMonthIcon fontSize="large"/>
                 </IconButton>
             </Toolbar>
         </AppBar>

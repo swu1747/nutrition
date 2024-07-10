@@ -13,14 +13,14 @@ const RecordPage = () => {
             navigate('/calburn')
         }}>
             <CardContent >
-                <Typography variant='h1' textAlign={'center'} color='#DE3163' fontWeight={30}>Calories Burn</Typography>
+                <Typography fontSize={80} textAlign={'center'} color='#DE3163' fontWeight={120}>Calories Burn</Typography>
             </CardContent>
         </Card>
         <Card sx={{ height: 400, display: 'flex', justifyContent: 'center', flexDirection: 'column' }} onClick={() => {
             navigate('/eatfood')
         }}>
             <CardContent >
-                <Typography variant='h1' textAlign={'center'} color='#50C878' fontWeight={30}>Calories Intake</Typography>
+                <Typography fontSize={80} textAlign={'center'} color='#50C878' fontWeight={120}>Calories Intake</Typography>
             </CardContent>
         </Card>
         <Navi n={1} />

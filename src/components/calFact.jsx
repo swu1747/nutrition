@@ -40,7 +40,7 @@ const CalFact = ({ cur }) => {
             data: data2,
             innerRadius: 0,
             outerRadius: 140,
-            arcLabel: (item) => `${item.value} \n Calories`,
+            arcLabel: (item) => `${item.value}Cals`,
         }
     ]
     const changeAmount = (e) => {
@@ -102,7 +102,6 @@ const CalFact = ({ cur }) => {
         </FormControl>
         <Button variant="contained" onClick={submitHandler}>Submit</Button>
         <Box >
-
             <PieChart
                 slotProps={{
                     legend: {
