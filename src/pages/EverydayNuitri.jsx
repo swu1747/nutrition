@@ -88,7 +88,7 @@ const EverydayNutri = () => {
                 }
             })}
         </Stack>
-        <Drawer anchor="bottom" open={drawer}>
+        <Drawer anchor="top" open={drawer}>
             <MyCalendar drawerHandler={drawerHandler} currentdateHandler={currentdateHandler} monthlyhander={fetchRangeDnutri} dayhander={fetchdaynutri} cal={monthlydaynutri} color='#50C878' />
         </Drawer>
         <Navi n={0} />

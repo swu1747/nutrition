@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const Navi = ({ n }) => {
     const navigate = useNavigate()
-    return (<Box sx={{ width: '100%', position: 'fixed', bottom: 300 }}>
+    return (<Box sx={{ width: '100%', position: 'fixed', bottom: 0 }}>
         <BottomNavigation
             sx={{ justifyContent: 'space-around',minHeight:100,fontSize:'60px' }}
             showLabels

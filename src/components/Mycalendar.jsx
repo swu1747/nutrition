@@ -17,8 +17,44 @@ const MyCalendar = ({ drawerHandler, currentdateHandler, monthlyhander, dayhande
         dispath(monthlyhander({ start, end }))
     }, [])
     return (<LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DateCalendar
-            // defaultValue={initial}
+        <DateCalendar sx={{
+            height: '650px !important',
+            width: '600px !important',
+            'max-height': '800px !important',
+            // overflow:'visible !important',
+            // // '.MuiPickersFadeTransitionGroup-root': {
+            // //     height: 100,
+            // //     width: 800
+            // // }
+
+            // // '.MuiPickersCalendarHeader-root':{
+            // //     width:600
+            // // }
+            '.MuiPickersCalendarHeader-label': {
+                fontSize: 32,
+                width: 150,
+                height: 48
+            },
+            '.MuiSvgIcon-root': {
+                height: 48,
+                width: 48,
+                fontSize: 48
+            },
+            '.MuiPickersSlideTransition-root': {
+                minHeight: 650
+            },
+            '.MuiBadge-root': {
+                width: 72,
+                height: 80
+            },
+            '.MuiTypography-root': {
+                width: 72,
+                height: 80,
+                fontSize: 24,
+                margin: '0 4px'
+            },
+        }}
+            slotProps={{ textField: { fullWidth: true } }}
             disableHighlightToday={true}
             disableFuture={true}
             onChange={(date) => {
@@ -34,6 +70,7 @@ const MyCalendar = ({ drawerHandler, currentdateHandler, monthlyhander, dayhande
             }}
             // renderLoading={() => <DayCalendarSkeleton sx={{ width: 400 }} />}
             slots={{
+
                 day: ({ day, outsideCurrentMonth, ...others }) => {
                     const date = day.format('MM-DD-YYYY')
                     return (<Badge
@@ -42,9 +79,14 @@ const MyCalendar = ({ drawerHandler, currentdateHandler, monthlyhander, dayhande
                             vertical: 'bottom',
                             horizontal: 'right',
                         }}
-                        badgeContent={!outsideCurrentMonth ? <MyGauge val={cal[date] ? +cal[date] : 0} width={30} height={30} rad={8} color={color} /> : null}
+                        badgeContent={!outsideCurrentMonth ? <MyGauge val={cal[date] ? +cal[date] : 0} width={50} height={50} rad={10} color={color} /> : null}
                     >
                         <PickersDay
+                            sx={{
+                                fontSize: 24,
+                                height: 100,
+                                width: 100,
+                            }}
                             outsideCurrentMonth={outsideCurrentMonth}
                             day={day} {...others} />
                     </Badge>)

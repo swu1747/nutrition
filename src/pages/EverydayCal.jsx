@@ -43,11 +43,11 @@ const EverdayCal = () => {
                 <IconButton color="inherit" onClick={()=>{
                     Nav('/')
                 }}>
-                    <ArrowBackIosNewTwoToneIcon />
+                    <ArrowBackIosNewTwoToneIcon fontSize="large"/>
                 </IconButton>
-                <Typography variant="h5" align='center' sx={{ flexGrow: 3 }}> Current Date: {currentdate} </Typography>
-                <IconButton color="inherit" onClick={drawerHandler}>
-                    <CalendarMonthIcon />
+                <Typography variant="h4" align='center' sx={{ flexGrow: 3 }}> Current Date: {currentdate} </Typography>
+                <IconButton color="inherit" onClick={drawerHandler} >
+                    <CalendarMonthIcon fontSize="large" />
                 </IconButton>
             </Toolbar>
         </AppBar>
@@ -60,7 +60,7 @@ const EverdayCal = () => {
         </Box>
         <CalDChart cal={caldetail} />
         <CalDtable detail={detail} />
-        <Drawer anchor="bottom" open={drawer}>
+        <Drawer anchor="top" open={drawer}>
             <MyCalendar drawerHandler={drawerHandler} currentdateHandler={currentdateHandler} monthlyhander={fetchMonthlycal} dayhander={fetchcaldetail} cal={EachDayCal} />
         </Drawer>
         <Navi n={0}/>
