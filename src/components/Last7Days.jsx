@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { getrangedaynuitri, getrangeddayscal } from "../clientapi";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Container, Typography,Box } from "@mui/material";
 import MyGauge from "./mygauge.jsx";
 import { useNavigate } from "react-router-dom";
 
@@ -52,16 +52,23 @@ const Last7Days = () => {
             <Typography variant="h3" color={'#5a5a5a'}>
                 Avg Cals Burn
             </Typography>
-            <MyGauge val={calburn} width={400} height={400} rad={100} color='#DE3163' />
+            <Container><Box width={450} margin='0 auto'>
+                <MyGauge val={calburn} width={300} height={300} rad={70} color='#DE3163' />
+            </Box>
+            </Container>
             <Typography variant="h4" color={'#808080'}>
                 {calburn}/2000 Cals in last 7 days
             </Typography>
         </CardContent>
         <CardContent>
             <Typography variant="h3" color={'#5a5a5a'}>
-                Avg Cals InTake
+                Avg Cals In-Take
             </Typography>
-            <MyGauge width={400} height={400} val={caltake} rad={100} color='#50C878' />
+            <Container><Box width={450} margin='0 auto'>
+
+                <MyGauge width={300} height={300} val={caltake} rad={70} color='#50C878' />
+            </Box>
+            </Container>
             <Typography variant="h4" color={'#808080'}>
                 {caltake}/2000 Cals in last 7 days
             </Typography>

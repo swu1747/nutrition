@@ -10,7 +10,15 @@ const CalDtable = ({ detail }) => {
         const cal = end.diff(start, 'minute') * (+item.calpermin)
         return { exercise, starttime: start.format('HH:mm'), endtime: end.format('HH:mm'), cal }
     })
-    return <TableContainer component={Paper} sx={{ width: 470 }}>
+    return <TableContainer component={Paper} sx={{
+
+        '.MuiTableCell-head': {
+            fontSize: 20
+        },
+        '.MuiTableCell-body': {
+            fontSize: 20
+        }
+    }}>
         <Table sx={{ maxWidth: '100%' }} >
             <TableHead>
                 <TableRow>

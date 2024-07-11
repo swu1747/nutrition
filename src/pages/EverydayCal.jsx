@@ -17,7 +17,7 @@ import Navi from "../components/Navi.jsx";
 
 
 const EverdayCal = () => {
-    const Nav=useNavigate()
+    const Nav = useNavigate()
     const param = useParams()
     const caldetail = useSelector(getcaldetail)
     const totalCal = useSelector(gettotalcal)
@@ -37,34 +37,37 @@ const EverdayCal = () => {
         const date = param.date
         dispatch(fetchcaldetail(date))
     }, [])
-    return <Stack spacing={2} sx={{ justifyContent: "flex-end" }} >
-        <AppBar position="static">
-            <Toolbar sx={{ display: "flex" }}>
-                <IconButton color="inherit" onClick={()=>{
-                    Nav('/')
-                }}>
-                    <ArrowBackIosNewTwoToneIcon fontSize="large"/>
-                </IconButton>
-                <Typography variant="h4" align='center' sx={{ flexGrow: 3 }}> Current Date: {currentdate} </Typography>
-                <IconButton color="inherit" onClick={drawerHandler} >
-                    <CalendarMonthIcon fontSize="large" />
-                </IconButton>
-            </Toolbar>
-        </AppBar>
+    return (<>        <AppBar position="static">
+        <Toolbar sx={{ display: "flex" }}>
+            <IconButton color="inherit" onClick={() => {
+                Nav('/')
+            }}>
+                <ArrowBackIosNewTwoToneIcon fontSize="large" />
+            </IconButton>
+            <Typography variant="h4" align='center' sx={{ flexGrow: 3 }}> Current Date: {currentdate} </Typography>
+            <IconButton color="inherit" onClick={drawerHandler} >
+                <CalendarMonthIcon fontSize="large" />
+            </IconButton>
+        </Toolbar>
+    </AppBar>
+        <Stack spacing={2}>
         <Container maxWidth="false">
-            <MyGauge val={totalCal} color='#DE3163' width={350} height={350} rad={100} />
+            <Box margin={'0 auto'} width={500}>
+                <MyGauge val={totalCal} color='#DE3163' width={500} height={500} rad={120} />
+            </Box>
         </Container>
         <Box display='flex' flexDirection='column'>
-            <Typography variant="h5">Cal Burn</Typography>
-            <Typography color='#DE3163'>{totalCal}/2000 CAL</Typography>
+            <Typography variant="h3">Cal Burn</Typography>
+            <Typography color='#DE3163' variant="h4">{totalCal}/2000 CAL</Typography>
         </Box>
-        <CalDChart cal={caldetail} />
+        <Box><CalDChart cal={caldetail} /></Box>
         <CalDtable detail={detail} />
         <Drawer anchor="top" open={drawer}>
             <MyCalendar drawerHandler={drawerHandler} currentdateHandler={currentdateHandler} monthlyhander={fetchMonthlycal} dayhander={fetchcaldetail} cal={EachDayCal} />
         </Drawer>
-        <Navi n={0}/>
-    </Stack>
+        <Navi n={0} />
+    </Stack></>)
+
 }
 
 export default EverdayCal

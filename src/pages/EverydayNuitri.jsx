@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -58,41 +58,46 @@ const EverydayNutri = () => {
     const currentdateHandler = (date) => {
         setcurrentdate(date)
     }
-    return (<Stack>
-        <AppBar position="static">
+    return (
+        <>        <AppBar position="static">
             <Toolbar sx={{ display: "flex" }}>
                 <IconButton color="inherit" onClick={() => {
                     Nav('/')
                 }} >
-                    <ArrowBackIosNewTwoToneIcon fontSize="large"/>
+                    <ArrowBackIosNewTwoToneIcon fontSize="large" />
                 </IconButton>
                 <Typography variant="h4" align='center' sx={{ flexGrow: 3 }}> Current Date: {currentdate} </Typography>
                 <IconButton color="inherit" onClick={drawerHandler}>
-                    <CalendarMonthIcon fontSize="large"/>
+                    <CalendarMonthIcon fontSize="large" />
                 </IconButton>
             </Toolbar>
         </AppBar>
-        <MyGauge val={daynutri.calories} width={350} height={350} color='#50C878' rad={100} />
-        <Typography variant="h5">
-            Calories Intake:
-        </Typography>
-        <Typography>
-            {daynutri.calories}/2000 Cal
-        </Typography>
-        <Stack width={400}>
-            {Object.keys(daynutri).map((key) => {
-                if (!limit[key]) {
-                    return null
-                } else {
-                    return <Sliders key={key} free={true} value={daynutri[key]} item={key} total={limit[key]} unit={unit[key]} />
-                }
-            })}
-        </Stack>
-        <Drawer anchor="top" open={drawer}>
-            <MyCalendar drawerHandler={drawerHandler} currentdateHandler={currentdateHandler} monthlyhander={fetchRangeDnutri} dayhander={fetchdaynutri} cal={monthlydaynutri} color='#50C878' />
-        </Drawer>
-        <Navi n={0} />
-    </Stack>)
+            <Stack>
+                <Container>
+                    <Box width={500} margin='0 auto'>
+                        <MyGauge val={daynutri.calories} width={500} height={500} color='#50C878' rad={120} />
+                    </Box>
+                </Container>
+                <Typography variant="h3">
+                    Calories Intake:
+                </Typography>
+                <Typography variant="h4">
+                    {daynutri.calories}/2000 Cal
+                </Typography>
+                <Stack width={800} height={800} overflow='auto'>
+                    {Object.keys(daynutri).map((key) => {
+                        if (!limit[key]) {
+                            return null
+                        } else {
+                            return <Sliders key={key} free={true} value={daynutri[key]} item={key} total={limit[key]} unit={unit[key]} />
+                        }
+                    })}
+                </Stack>
+                <Drawer anchor="top" open={drawer}>
+                    <MyCalendar drawerHandler={drawerHandler} currentdateHandler={currentdateHandler} monthlyhander={fetchRangeDnutri} dayhander={fetchdaynutri} cal={monthlydaynutri} color='#50C878' />
+                </Drawer>
+                <Navi n={0} />
+            </Stack></>)
 }
 
 export default EverydayNutri

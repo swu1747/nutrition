@@ -3,9 +3,11 @@ import { BarChart } from "@mui/x-charts";
 
 const CalDChart = ({ cal }) => {
 
-    return (<BarChart
+    return (<BarChart yAxis={[{
+        tickFontSize: 20
+    }]}
         series={[{ data: cal, label: 'Calorie Burn Rate(Cal/h)', color: '#DE3163' }]}
-        height={300} width={500} borderRadius={5} grid={{ horizontal: true }} />)
+        height={500} width={950} borderRadius={15} grid={{ horizontal: true }} />)
 
 }
 

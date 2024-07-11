@@ -40,36 +40,42 @@ const Last7daycal = () => {
 
     }, [])
     return <Stack>
-        <Typography variant="h5">
-            calroies intake in past 7 days
+        <Typography variant="h3">
+            calroies intake
+        </Typography>
+        <Typography variant="h4">
+            in past 7 days
         </Typography>
         <LineChart
-            xAxis={[{ scaleType: 'point', data: last7Days }]}
+            xAxis={[{ scaleType: 'point', data: last7Days, tickFontSize: 15 }]}
             series={[
                 {
                     data: last7daysnutri,
-                    color:"#50C878"
+                    color: "#50C878"
                 }
             ]}
-
-
-            width={500}
-            height={300}
+            yAxis={[{ tickFontSize: 15 }]}
+            width={800}
+            height={600}
         />
-        <Typography variant="h5">
-            calroies burn in past 7 days
+        <Typography variant="h3">
+            calroies burn
+        </Typography>
+        <Typography variant="h4">
+            in past 7 days
         </Typography>
         <LineChart
-            xAxis={[{ scaleType: 'point', data: last7Days }]}
+            xAxis={[{ scaleType: 'point', data: last7Days, tickFontSize: 15 }]}
+            yAxis={[{ tickFontSize: 15 }]}
             series={[
                 {
                     data: last7dayscal,
-                    color:"#DE3163"
+                    color: "#DE3163"
 
                 }
             ]}
-            width={500}
-            height={300}
+            width={800}
+            height={600}
         />
         <Navi n={0} />
     </Stack>
