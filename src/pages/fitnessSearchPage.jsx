@@ -1,4 +1,4 @@
-import { Card, CardMedia, ListItem, List, CardContent, Typography, AppBar, Select, InputLabel, MenuItem, FormControl, Button, Link, Box, Rating } from "@mui/material";
+import { CircularProgress, Card, CardMedia, ListItem, List, CardContent, Typography, AppBar, Select, InputLabel, MenuItem, FormControl, Button, Link, Box, Rating, Stack } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink, useParams } from "react-router-dom";
@@ -42,7 +42,7 @@ const FitnessSearch = () => {
     }, [])
     return (<>
         <TopNavi display={'Fitness Center'} />
-        <AppBar position="static">
+        <Stack>        <AppBar position="static">
             <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel  >difficulty</InputLabel>
                 <Select value={difficulty} onChange={difficultyhandler}>
@@ -67,31 +67,33 @@ const FitnessSearch = () => {
             </FormControl>
             <Button variant="contained" onClick={searchHandler}>Search</Button>
         </AppBar>
-        <List sx={{ height: 1350, overflow: 'auto' }}>
-            {excerList.map((excer) => {
-                let value = 5
-                if (excer.difficulty == 'beginner') {
-                    value = 1
-                } else {
-                    value = 3
-                }
-                return <ListItem key={uuidv4()}>
-                    <Link component={RouterLink} underline='none' to={`/fitness/${excersie}/${excer.name}`}>
-                        <Card sx={{ height: 350, width: 900, display: 'flex' }}>
-                            <CardMedia sx={{ height: 300, width: 300 }} component='img' image={`/type/${excer.type}.png`} />
-                            <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} >
-                                <Typography gutterBottom variant="h3" component="div">{excer.name}</Typography>
-                                <Box>
-                                    <Typography gutterBottom variant="h4" component="div"> difficulty</Typography>
-                                    <Rating readOnly size='large' value={value} />
-                                </Box>
-                            </CardContent>
-                        </Card>
-                    </Link>
-                </ListItem>
-            })}
-        </List>
-        {status === 'pending' ? <div>loading...</div> : <></>}
+            {status === 'pending' ? <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+                <CircularProgress color="primary" size={80} thickness={5} />
+            </Box> : <List sx={{ height: 1300, overflow: 'auto' }}>
+                {excerList.map((excer) => {
+                    let value = 5
+                    if (excer.difficulty == 'beginner') {
+                        value = 1
+                    } else {
+                        value = 3
+                    }
+                    return <ListItem key={uuidv4()}>
+                        <Link component={RouterLink} underline='none' to={`/fitness/${excersie}/${excer.name}`}>
+                            <Card sx={{ height: 350, width: 900, display: 'flex' }}>
+                                <CardMedia sx={{ height: 300, width: 300 }} component='img' image={`/type/${excer.type}.png`} />
+                                <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} >
+                                    <Typography gutterBottom variant="h3" component="div">{excer.name}</Typography>
+                                    <Box>
+                                        <Typography gutterBottom variant="h4" component="div"> difficulty</Typography>
+                                        <Rating readOnly size='large' value={value} />
+                                    </Box>
+                                </CardContent>
+                            </Card>
+                        </Link>
+                    </ListItem>
+                })}
+            </List>}
+        </Stack>
         <Navi n={2} />
     </>)
 }
