@@ -25,6 +25,7 @@ let nuitruiApi
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '../dist')))
 app.use(express.json())
+
 app.use((req, res, next) => {
     const token = req.cookies.token
     if (!token) {
