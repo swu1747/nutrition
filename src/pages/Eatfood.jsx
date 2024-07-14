@@ -90,7 +90,7 @@ const EatFood = () => {
             </Box>
 
         </Box>
-        {status === 'idle' ? null : <Stack sx={{ marginLeft: 3, height: 1400, overflow: 'auto' }} >{
+        {status === 'idle' ? null : <Stack sx={{ marginLeft: 3, height: 1350, overflow: 'auto' }} >{
             nuitrilist.map((food) => {
                 return <Link component={RouterLink} underline="none" key={food.food_id} to={`/eatfood/${food.food_id}`} ><Card sx={{ width: 900 }}  >
                     <CardContent><Typography variant="h4">{food.food_name}</Typography></CardContent>

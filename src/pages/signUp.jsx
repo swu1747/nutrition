@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Button, Stack, TextField, Box, Typography } from "@mui/material";
 import { checkSignUpStatus } from "../feature/signUpSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
@@ -41,24 +41,32 @@ const SignUp = () => {
         setavarturl(avatar)
     }
     if (signUpStatus === 'idle' || signUpStatus === 'failed') {
-        content = <div>
-            <form onSubmit={signUpHandler}>
-                <label>email:</label><br />
-                <input type='text' value={email.value} onChange={email.onChange} /><br />
-                <label>password:</label><br />
-                <input type='text' value={pwd.value} onChange={pwd.onChange} /><br />
-                <label>username:</label><br />
-                <input type='text' value={username.value} onChange={username.onChange} /><br />
-                <input type='submit' />
-            </form>
-            <Avatar src={preview}></Avatar>
-            <Button component="label"
-                role={undefined}
-                variant="contained"
-                tabIndex={-1}>Choose Avatar <VisuallyHiddenInput onChange={avatarhandler} type='file' /></Button>
-        </div>
+        content = <Box marginTop={20}>
+            <Stack spacing={3} margin='0 auto' width={500}>
+                <Box component="img"
+                    sx={{
+                        height: 150,
+                        width: 500,
+                    }} src='/logo/Screen Shot 2024-07-12 at 11.23.18 AM.png'
+                ></Box>
+                <Typography>Please enter Email:</Typography>
+                <TextField type='text' label='Email' value={email.value} onChange={email.onChange} />
+                <Typography>Please enter password:</Typography>
+                <TextField type='password' label='Password' value={pwd.value} onChange={pwd.onChange} />
+                <Typography>Please Re-Enter password:</Typography>
+                <TextField type='password' label='Re-Enter Password' />
+                <Typography>Please enter username:</Typography>
+                <TextField type='text' label='username' value={username.value} onChange={username.onChange} />
+                <Button component="label"
+                    variant="contained"
+                    tabIndex={-1} sx={{ width: 150 }}>Choose<nbsp />Avatar<VisuallyHiddenInput onChange={avatarhandler} type='file'
+                    /></Button>
+                <Avatar src={preview}></Avatar>
+                <Box display={'flex'} justifyContent='space-around'><Button onClick={signUpHandler} variant="contained" sx={{ width: 150 }}>Submit</Button></Box>
+            </Stack >
+        </Box >
     } else if (signUpStatus === 'pending') {
-        content = <div>creating account...</div>
+        content = <Box width={400} margin='20 auto'> <Typography variant="h4">Creating Account</Typography></Box>
     } else {
         content = <Navigate to='/' />
     }

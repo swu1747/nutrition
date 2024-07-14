@@ -32,7 +32,7 @@ const SignIn = () => {
         <Stack spacing={3} width={500} margin='0 auto'>
             <Box component="img"
                 sx={{
-                    height: 233,
+                    height: 150,
                     width: 500,
                 }} src='/logo/Screen Shot 2024-07-12 at 11.23.18 AM.png'
             ></Box>
