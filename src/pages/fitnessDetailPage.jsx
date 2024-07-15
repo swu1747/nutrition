@@ -36,7 +36,7 @@ const ExcerciseDetail = () => {
                 <Typography variant="h4">required equipment: {detail.equipment}</Typography>
             </CardContent>
             <CardContent>
-                <Typography variant="h6">{detail.instructions}</Typography>
+                <Typography variant="h5">{detail.instructions}</Typography>
             </CardContent>
         </Card>
         <Navi n={2} />

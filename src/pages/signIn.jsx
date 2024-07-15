@@ -17,7 +17,8 @@ const SignIn = () => {
     const navi = useNavigate()
     const loginHandler = (e) => {
         e.preventDefault()
-        signInWithEmailAndPassword(auth, email, pwd).then((userCredential) => {
+        console.log('>>>>>>', email.value, pwd.value)
+        signInWithEmailAndPassword(auth, email.value, pwd.value).then((userCredential) => {
             navi('/')
         }).catch((err) => {
             console.log('err', err)
