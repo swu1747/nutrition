@@ -1,9 +1,6 @@
 import { Avatar, Stack, Link, Button } from "@mui/material";
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import Logout from "../components/logout.jsx";
-import { checkUserphoto } from "../feature/UserInfoSlice.js";
 import CalWedge from "../components/calWedge.jsx";
 import NuitriWedge from "../components/nuitriWedge.jsx";
 import Last7DaysWidge from "../components/Last7Days.jsx";
