@@ -38,7 +38,6 @@ export const signup = createAsyncThunk('signup', async ({ auth, email, password,
         })
     } catch (err) {
         console.log('err', err)
-        throw err
     }
 })
 export const checkSignUpStatus = (state) => {
